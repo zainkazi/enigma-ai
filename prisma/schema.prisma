@@ -20,6 +20,8 @@ model User {
   plan     Plan?
   credits  Credits?
   projects Project[]
+
+  @@index([id])
 }
 
 model Credits {
@@ -49,10 +51,10 @@ model Project {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  characterImage  String
+  
   characterPrompt String @db.Text
-  textPrompt      String @db.Text
+  speechPrompt      String @db.Text
+  characterImageURL  String @db.Text
 
   userId String @unique
   user   User   @relation(fields: [userId], references: [id])
