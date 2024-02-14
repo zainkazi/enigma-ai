@@ -13,7 +13,9 @@ export const POST = async (request: NextRequest) => {
   const speech = Buffer.from(await mp3.arrayBuffer());
   const { data, error } = await supabase.storage
     .from("speeches")
-    .upload("public/speech2.mp3", speech);
+    .upload("public/speech2.mp3", speech, {
+      upsert: true,
+    });
 
   if (error) {
     return NextResponse.json({ error }, { status: 400 });
