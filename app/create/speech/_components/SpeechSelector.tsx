@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 
-const speeds = [1, 1.25, 1.5, 2]; // The different speed options available
+const speeds = [1, 1.25, 1.5, 2];
 
 const SpeedSelector = () => {
-  const [selectedSpeed, setSelectedSpeed] = useState(speeds[0]); // Default to the first speed option
+  const speeds = [1, 1.25, 1.5, 2];
+  const [selectedSpeed, setSelectedSpeed] = useState(speeds[0]);
 
   return (
     <div>

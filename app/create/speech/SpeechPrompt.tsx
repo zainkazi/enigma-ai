@@ -5,15 +5,13 @@ import GenderSelector from "../avatar/_components/GenderSelector";
 
 function SpeechPrompt() {
   return (
-    <section>
-      <div className="space-y-16">
-        <div className="flex gap-24">
-          <GenderSelector />
-          <SpeedSelector />
-        </div>
-        <div>
-          <SpeechInput />
-        </div>
+    <section className="space-y-10">
+      <div className="flex gap-24">
+        <GenderSelector />
+        <SpeedSelector />
+      </div>
+      <div>
+        <SpeechInput />
       </div>
     </section>
   );

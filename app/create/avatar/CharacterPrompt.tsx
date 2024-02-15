@@ -7,14 +7,12 @@ import CharacterQuantitySelector from "./_components/CharacterQuantitySelector";
 
 function CharacterPrompt() {
   return (
-    <section>
-      <div className="space-y-6">
-        <EthnicityDropDownMenu />
-        <AgeGroupDropDownMenu />
-        <HairColorPicker />
-        <GenderSelector />
-        <CharacterQuantitySelector />
-      </div>
+    <section className="space-y-4">
+      <EthnicityDropDownMenu />
+      <AgeGroupDropDownMenu />
+      <HairColorPicker />
+      <GenderSelector />
+      <CharacterQuantitySelector />
     </section>
   );
 }

@@ -21,9 +21,9 @@ const HairColorPicker = () => {
         {colors.map((color) => (
           <button
             key={color.name}
-            className={`w-6 h-6 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 ${
+            className={`w-6 h-6 rounded-full focus:outline-none focus:ring-1 focus:ring-offset-1 ${
               selectedColor === color.value
-                ? "ring-1 ring-offset-2 ring-white"
+                ? "ring-1 ring-offset-1 ring-white"
                 : ""
             } ${color.value}`}
             onClick={() => setSelectedColor(color.value)}

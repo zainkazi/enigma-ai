@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 
 const EthnicityDropDownMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -34,7 +34,7 @@ const EthnicityDropDownMenu = () => {
 
   return (
     <div className="relative " ref={dropdownRef}>
-      <h1 className=" text-lg font-medium py-2">Ethnicty</h1>
+      <h1 className="text-lg font-medium py-2">Ethnicty</h1>
       <button
         className="border border-zinc-100 w-64 text-white px-4 py-2 rounded-md flex items-center justify-between"
         onClick={() => setIsOpen(!isOpen)}

@@ -3,11 +3,7 @@
 import React, { useState } from "react";
 
 const GenderSelector = () => {
-  const [selectedGender, setSelectedGender] = useState(null);
-
-  const handleSelectGender = (gender) => {
-    setSelectedGender(gender);
-  };
+  const [selectedGender, setSelectedGender] = useState("");
 
   return (
     <div>
@@ -19,7 +15,7 @@ const GenderSelector = () => {
               ? "bg-blue-500 "
               : "border-2 border-zinc-100"
           } mx-1`}
-          onClick={() => handleSelectGender("Male")}
+          onClick={() => setSelectedGender("Male")}
         >
           Male
         </button>
@@ -29,7 +25,7 @@ const GenderSelector = () => {
               ? "bg-pink-500"
               : "border-2 border-zinc-100"
           } mx-1`}
-          onClick={() => handleSelectGender("Female")}
+          onClick={() => setSelectedGender("Female")}
         >
           Female
         </button>

@@ -6,10 +6,6 @@ const CharacterQuantitySelector = () => {
   const [selectedQuantity, setSelectedQuantity] = useState(1);
   const quantities = [1, 2, 3, 4];
 
-  const selectQuantity = (quantity) => {
-    setSelectedQuantity(quantity);
-  };
-
   return (
     <div className=" text-white flex flex-col ">
       <h1 className=" text-lg font-medium py-2">Number of Characters</h1>
@@ -22,7 +18,7 @@ const CharacterQuantitySelector = () => {
                 ? " border-indigo-600 bg-indigo-600 border-2 "
                 : "border-2 border-zinc-100 "
             }`}
-            onClick={() => selectQuantity(quantity)}
+            onClick={() => setSelectedQuantity(quantity)}
           >
             {quantity}
           </button>
