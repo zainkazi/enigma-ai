@@ -19,7 +19,7 @@ const CharacterQuantitySelector = () => {
             key={quantity}
             className={`w-10 h-10 rounded-full mx-1 text-center ${
               numberOfCharacters === quantity
-                ? " border-indigo-600 bg-indigo-600 border-2 "
+                ? " border-blue-500 bg-blue-500 border-2 "
                 : "border-2 border-zinc-100 "
             }`}
             onClick={() =>
