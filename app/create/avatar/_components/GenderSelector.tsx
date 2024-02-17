@@ -1,9 +1,11 @@
 "use client";
 
+import { useAvatarStore } from "@/store";
 import React, { useState } from "react";
 
 const GenderSelector = () => {
-  const [selectedGender, setSelectedGender] = useState("");
+  const gender = useAvatarStore((state) => state.formData.gender);
+  const setGender = useAvatarStore((state) => state.setFormData);
 
   return (
     <div>
@@ -11,21 +13,17 @@ const GenderSelector = () => {
       <div className="text-white flex  ">
         <button
           className={`px-4 py-2 rounded-full w-24 ${
-            selectedGender === "Male"
-              ? "bg-blue-500 "
-              : "border-2 border-zinc-100"
+            gender === "Male" ? "bg-blue-500 " : "border-2 border-zinc-100"
           } mx-1`}
-          onClick={() => setSelectedGender("Male")}
+          onClick={() => setGender("gender", "Male")}
         >
           Male
         </button>
         <button
           className={`px-4 py-2 rounded-full w-24 ${
-            selectedGender === "Female"
-              ? "bg-pink-500"
-              : "border-2 border-zinc-100"
+            gender === "Female" ? "bg-pink-500" : "border-2 border-zinc-100"
           } mx-1`}
-          onClick={() => setSelectedGender("Female")}
+          onClick={() => setGender("gender", "Female")}
         >
           Female
         </button>
