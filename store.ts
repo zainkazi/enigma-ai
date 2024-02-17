@@ -29,9 +29,17 @@ interface AvatarStore {
   resetForm: () => void;
 }
 
+const initialAvatarData = {
+  ethnicity: null,
+  ageGroup: null,
+  hairColor: null,
+  gender: null,
+  numberOfCharacters: 1,
+};
+
 export const useAvatarStore = create<AvatarStore>()((set) => ({
   formData: {
-    ethnicity: null,
+    ethnicity: "Asian",
     ageGroup: null,
     hairColor: null,
     gender: null,
@@ -50,3 +58,7 @@ export const useAvatarStore = create<AvatarStore>()((set) => ({
       },
     })),
 }));
+
+useAvatarStore.subscribe((state) =>
+  console.log("State updated:", state.formData)
+);
