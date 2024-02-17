@@ -1,9 +1,11 @@
 "use client";
 
+import { useAvatarStore } from "@/store";
 import React, { useState } from "react";
 
 const HairColorPicker = () => {
-  const [selectedColor, setSelectedColor] = useState("");
+  const hairColor = useAvatarStore((state) => state.formData.hairColor);
+  const setHairColor = useAvatarStore((state) => state.setFormData);
 
   const colors = [
     { name: "Black", value: "bg-black" },
@@ -21,12 +23,10 @@ const HairColorPicker = () => {
         {colors.map((color) => (
           <button
             key={color.name}
-            className={`w-6 h-6 rounded-full focus:outline-none focus:ring-1 focus:ring-offset-1 ${
-              selectedColor === color.value
-                ? "ring-1 ring-offset-1 ring-white"
-                : ""
+            className={`w-6 h-6 rounded-full focus:outline-none focus:ring focus:ring-offset-1 ${
+              hairColor === color.value ? "ring ring-white" : ""
             } ${color.value}`}
-            onClick={() => setSelectedColor(color.value)}
+            onClick={() => setHairColor("hairColor", color.name)}
             aria-label={`Select ${color.name}`}
           />
         ))}
