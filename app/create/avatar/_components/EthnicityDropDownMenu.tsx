@@ -16,7 +16,6 @@ const EthnicityDropDownMenu = () => {
     "Middle Eastern",
     "Native American",
     "Pacific Islander",
-    "Other",
   ];
 
   useEffect(() => {
