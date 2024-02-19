@@ -13,12 +13,12 @@ const CharacterQuantitySelector = () => {
   return (
     <div className=" text-white flex flex-col ">
       <h1 className=" text-lg font-medium py-2">Number of Characters</h1>
-      <div className="flex">
+      <div className="flex space-x-3">
         {quantities.map((quantity) => (
           <button
             type="button"
             key={quantity}
-            className={`w-10 h-10 rounded-full mx-1 text-center ${
+            className={`w-8 h-8 rounded-full text-sm mx-1 text-center ${
               numberOfCharacters === quantity
                 ? " border-blue-500 bg-blue-500 border-2 "
                 : "border-2 border-zinc-100 "

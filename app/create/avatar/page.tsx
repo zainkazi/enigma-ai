@@ -7,7 +7,7 @@ const AvatarPage = () => {
       <div className="col-span-1">
         <CharacterPrompt />
       </div>
-      <div className="rounded-lg col-span-3 p-4 grid grid-cols-3 gap-4">
+      <div className="col-span-3">
         <CharacterTab />
       </div>
     </section>
