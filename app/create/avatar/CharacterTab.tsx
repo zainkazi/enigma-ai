@@ -2,13 +2,11 @@
 
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import vision from "@/public/vision.jpg";
 import { useAvatarStore } from "@/store";
 
 function CharacterTab() {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const avatars = useAvatarStore((state) => state.avatars);
-  console.log(avatars);
 
   if (avatars.length == 0) return null;
 
