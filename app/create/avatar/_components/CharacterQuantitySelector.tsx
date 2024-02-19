@@ -16,6 +16,7 @@ const CharacterQuantitySelector = () => {
       <div className="flex">
         {quantities.map((quantity) => (
           <button
+            type="button"
             key={quantity}
             className={`w-10 h-10 rounded-full mx-1 text-center ${
               numberOfCharacters === quantity

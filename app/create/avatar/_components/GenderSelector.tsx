@@ -1,7 +1,7 @@
 "use client";
 
 import { useAvatarStore } from "@/store";
-import React, { useState } from "react";
+import React from "react";
 
 const GenderSelector = () => {
   const gender = useAvatarStore((state) => state.formData.gender);
@@ -12,6 +12,7 @@ const GenderSelector = () => {
       <h1 className=" text-lg font-medium py-2">Gender</h1>
       <div className="text-white flex  ">
         <button
+          type="button"
           className={`px-4 py-2 rounded-full w-24 ${
             gender === "Male" ? "bg-blue-500 " : "border-2 border-zinc-100"
           } mx-1`}
@@ -20,6 +21,7 @@ const GenderSelector = () => {
           Male
         </button>
         <button
+          type="button"
           className={`px-4 py-2 rounded-full w-24 ${
             gender === "Female" ? "bg-pink-500" : "border-2 border-zinc-100"
           } mx-1`}

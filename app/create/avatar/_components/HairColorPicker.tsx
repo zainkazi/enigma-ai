@@ -22,6 +22,7 @@ const HairColorPicker = () => {
       <div className="flex items-center space-x-4 p-4 bg-zinc-900 rounded-full">
         {colors.map((color) => (
           <button
+            type="button"
             key={color.name}
             className={`w-6 h-6 rounded-full focus:outline-none focus:ring focus:ring-offset-1 ${
               hairColor === color.value ? "ring ring-white" : ""

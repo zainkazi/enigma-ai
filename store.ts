@@ -1,3 +1,4 @@
+import { StaticImageData } from "next/image";
 import { create } from "zustand";
 
 interface AvatarStore {
@@ -25,6 +26,8 @@ interface AvatarStore {
     gender: "Male" | "Female" | null;
     numberOfCharacters: 1 | 2 | 3 | 4;
   };
+  avatars: { url: string }[];
+  setAvatars: (avatarsList: { url: string }[]) => void;
   setFormData: (name: string, value: string | number) => void;
   resetForm: () => void;
 }
@@ -37,6 +40,8 @@ export const useAvatarStore = create<AvatarStore>()((set) => ({
     gender: null,
     numberOfCharacters: 1,
   },
+  avatars: [],
+  setAvatars: (avatars) => set(() => ({ avatars })),
   setFormData: (name, value) =>
     set((state) => ({ formData: { ...state.formData, [name]: value } })),
   resetForm: () =>

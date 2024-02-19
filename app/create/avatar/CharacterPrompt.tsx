@@ -7,10 +7,21 @@ import HairColorPicker from "./_components/HairColorPicker";
 import GenderSelector from "./_components/GenderSelector";
 import CharacterQuantitySelector from "./_components/CharacterQuantitySelector";
 import { Button } from "@/components/ui/button";
+import { useAvatarStore } from "@/store";
+import axios from "axios";
 
 function CharacterPrompt() {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const formData = useAvatarStore((state) => state.formData);
+  const setAvatars = useAvatarStore((state) => state.setAvatars);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log("Generating");
+
+    const generatedAvatars = await axios.post("/api/avatar", formData);
+
+    setAvatars(generatedAvatars.data.data);
+    console.log("Generated");
   };
 
   return (
