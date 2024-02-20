@@ -1,32 +1,36 @@
 import { StaticImageData } from "next/image";
 import { create } from "zustand";
 
+export interface FormData {
+  ethnicity:
+    | "Asian"
+    | "Black/African descent"
+    | "Hispanic/Latino"
+    | "White/Caucasian"
+    | "Middle Eastern"
+    | "Native American"
+    | "Pacific Islander"
+    | null;
+  ageGroup:
+    | "0 - 12"
+    | "13 - 17"
+    | "18 - 24"
+    | "25 - 34"
+    | "35 - 44"
+    | "45 - 54"
+    | "55 - 64"
+    | "65+"
+    | null;
+  hairColor: "Black" | "Blue" | "Red" | "Yellow" | "Pink" | "Gray" | null;
+  gender: "Male" | "Female" | null;
+  numberOfCharacters: 1 | 2 | 3 | 4;
+}
+
 interface AvatarStore {
-  formData: {
-    ethnicity:
-      | "Asian"
-      | "Black/African descent"
-      | "Hispanic/Latino"
-      | "White/Caucasian"
-      | "Middle Eastern"
-      | "Native American"
-      | "Pacific Islander"
-      | null;
-    ageGroup:
-      | "0 - 12"
-      | "13 - 17"
-      | "18 - 24"
-      | "25 - 34"
-      | "35 - 44"
-      | "45 - 54"
-      | "55 - 64"
-      | "65+"
-      | null;
-    hairColor: "Black" | "Blue" | "Red" | "Yellow" | "Pink" | "Gray" | null;
-    gender: "Male" | "Female" | null;
-    numberOfCharacters: 1 | 2 | 3 | 4;
-  };
+  formData: FormData;
   avatars: { url: string }[];
+  selectedAvatar: string | null;
+  setSelectedAvatar: (avatarUrl: string) => void;
   setAvatars: (avatarsList: { url: string }[]) => void;
   setFormData: (name: string, value: string | number) => void;
   resetForm: () => void;
@@ -41,6 +45,8 @@ export const useAvatarStore = create<AvatarStore>()((set) => ({
     numberOfCharacters: 1,
   },
   avatars: [],
+  selectedAvatar: null,
+  setSelectedAvatar: (avatarUrl) => set(() => ({ selectedAvatar: avatarUrl })),
   setAvatars: (avatars) => set(() => ({ avatars })),
   setFormData: (name, value) =>
     set((state) => ({ formData: { ...state.formData, [name]: value } })),
@@ -56,6 +62,4 @@ export const useAvatarStore = create<AvatarStore>()((set) => ({
     })),
 }));
 
-useAvatarStore.subscribe((state) =>
-  console.log("State updated:", state.formData)
-);
+useAvatarStore.subscribe((state) => console.log("State updated:", state));

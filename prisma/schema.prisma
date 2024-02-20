@@ -17,9 +17,9 @@ model User {
 
   email String @unique
 
-  plan     Plan?
-  credits  Credits?
-  projects Project[]
+  plan    Plan?
+  credits Credits?
+  // projects Project[]
 
   @@index([id])
 }
@@ -51,12 +51,16 @@ model Project {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  
-  characterPrompt String @db.Text
-  speechPrompt      String @db.Text
-  characterImageURL  String @db.Text
 
-  userId String @unique
-  user   User   @relation(fields: [userId], references: [id])
+  ethnicity String
+  ageGroup  String
+  hairColor String
+  gender    String
+
+  avatarUrl    String  @db.Text
+  speechPrompt String? @db.Text
+  speechUrl    String? @db.Text
+
+  // userId String @unique
+  // user   User   @relation(fields: [userId], references: [id])
 }
-

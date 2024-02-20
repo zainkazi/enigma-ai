@@ -6,19 +6,20 @@ import { useAvatarStore } from "@/store";
 import { Card } from "@/components/ui/card";
 
 function CharacterTab() {
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const selectedAvatar = useAvatarStore((state) => state.selectedAvatar);
+  const setSelectedAvatar = useAvatarStore((state) => state.setSelectedAvatar);
   const avatars = useAvatarStore((state) => state.avatars);
 
   if (avatars.length === 0) return null;
 
   return (
-    <Card className="grid grid-cols-3 gap-4 p-4">
-      {avatars.map((avatar, index) => (
+    <Card className="grid grid-cols-3 grid-rows-2 gap-4 p-4 min-h-screen">
+      {avatars.map((avatar) => (
         <div
-          key={index}
-          onClick={() => setSelectedIndex(index)}
+          key={avatar.url}
+          onClick={() => setSelectedAvatar(avatar.url)}
           className={`m-2 cursor-pointer ${
-            selectedIndex === index &&
+            selectedAvatar === avatar.url &&
             "ring-2 ring-blue-500 rounded-lg border-2"
           }`}
         >

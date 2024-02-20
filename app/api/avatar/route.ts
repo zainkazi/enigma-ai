@@ -1,6 +1,4 @@
 import openai from "@/utils/openai";
-import supabase from "@/utils/supabase";
-import axios from "axios";
 import { NextRequest, NextResponse } from "next/server";
 
 export const POST = async (request: NextRequest) => {
@@ -21,20 +19,6 @@ export const POST = async (request: NextRequest) => {
   if (!imageUrl) {
     return NextResponse.json({ error: "Could not generate image" });
   }
-
-  // const downloadedImage = await axios.get(imageUrl, {
-  //   responseType: "arraybuffer",
-  // });
-
-  // const { data, error } = await supabase.storage
-  //   .from("avatars")
-  //   .upload("public/avatar1.png", downloadedImage.data, {
-  //     contentType: "image/png",
-  //   });
-
-  // if (error) {
-  //   return NextResponse.json({ error }, { status: 400 });
-  // }
 
   return NextResponse.json(image);
 };

@@ -10,10 +10,12 @@ import { Button } from "@/components/ui/button";
 import { useAvatarStore } from "@/store";
 import axios from "axios";
 import { ArrowRight, Loader2 } from "lucide-react";
+import { createProject } from "@/utils/actions";
 
 function CharacterPrompt() {
   const formData = useAvatarStore((state) => state.formData);
   const setAvatars = useAvatarStore((state) => state.setAvatars);
+  const selectedAvatar = useAvatarStore((state) => state.selectedAvatar);
   const [generating, setGenerating] = useState(false);
   const [generated, setGenerated] = useState(false);
 
@@ -44,7 +46,11 @@ function CharacterPrompt() {
             {generating ? "Generating" : "Regenerate"}
             {generating && <Loader2 className="ml-2 h-4 w-4 animate-spin" />}
           </Button>
-          <Button disabled={generating}>
+          <Button
+            type="button"
+            disabled={generating || selectedAvatar == null}
+            onClick={async () => await createProject(formData, selectedAvatar!)}
+          >
             Next <ArrowRight className="h-4 w-4 ml-2" />
           </Button>
         </div>
