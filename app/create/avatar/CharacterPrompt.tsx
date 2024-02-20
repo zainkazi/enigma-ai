@@ -18,6 +18,7 @@ function CharacterPrompt() {
   const selectedAvatar = useAvatarStore((state) => state.selectedAvatar);
   const [generating, setGenerating] = useState(false);
   const [generated, setGenerated] = useState(false);
+  const [creatingProject, setCreatingProject] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -48,10 +49,19 @@ function CharacterPrompt() {
           </Button>
           <Button
             type="button"
-            disabled={generating || selectedAvatar == null}
-            onClick={async () => await createProject(formData, selectedAvatar!)}
+            disabled={generating || selectedAvatar == null || creatingProject}
+            onClick={async () => {
+              setCreatingProject(true);
+              await createProject(formData, selectedAvatar!);
+              setCreatingProject(false);
+            }}
           >
-            Next <ArrowRight className="h-4 w-4 ml-2" />
+            Next{" "}
+            {creatingProject ? (
+              <Loader2 className="ml-2 h-4 w-4 animate-spin" />
+            ) : (
+              <ArrowRight className="h-4 w-4 ml-2" />
+            )}
           </Button>
         </div>
       ) : (
