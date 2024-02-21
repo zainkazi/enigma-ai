@@ -16,7 +16,7 @@ const SpeedSelector = () => {
             onClick={() => setSpeed("speed", currentSpeed)}
             className={`w-20  py-2  rounded-full text-white ${
               speed === currentSpeed
-                ? "bg-indigo-600 ring-2 ring-indigo-500"
+                ? "bg-blue-500 ring-2 ring-blue-500"
                 : "border-2 border-zinc-100"
             }`}
           >

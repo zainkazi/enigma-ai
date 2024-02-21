@@ -1,13 +1,22 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import SpeedSelector from "./_components/SpeedSelector";
 import SpeechInput from "./_components/SpeechInput";
 import SpeechGenderSelector from "./_components/SpeechGenderSelector";
+import { Button } from "@/components/ui/button";
 
 function SpeechPrompt() {
+  const [generated, setGenerated] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    console.log("submitted");
+  };
+
   return (
-    <section className="space-y-10">
+    <form onSubmit={handleSubmit} className="space-y-10">
       <div className="flex gap-24">
         <SpeechGenderSelector />
         <SpeedSelector />
@@ -15,7 +24,23 @@ function SpeechPrompt() {
       <div>
         <SpeechInput />
       </div>
-    </section>
+      <div className="flex justify-end gap-4">
+        {generated ? (
+          <>
+            <Button type="button" className="px-8">
+              Regenerate
+            </Button>
+            <Button type="submit" className="px-8">
+              Continue
+            </Button>
+          </>
+        ) : (
+          <Button type="submit" className="px-16">
+            Generate
+          </Button>
+        )}
+      </div>
+    </form>
   );
 }
 
