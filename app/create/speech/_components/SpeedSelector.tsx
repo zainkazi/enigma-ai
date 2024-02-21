@@ -1,28 +1,26 @@
-"use client";
-
-import { useState } from "react";
-
-const speeds = [1, 1.25, 1.5, 2];
+import { useSpeechStore } from "@/store";
 
 const SpeedSelector = () => {
   const speeds = [1, 1.25, 1.5, 2];
-  const [selectedSpeed, setSelectedSpeed] = useState(speeds[0]);
+  const speed = useSpeechStore((state) => state.formData.speed);
+  const setSpeed = useSpeechStore((state) => state.setFormData);
 
   return (
     <div>
       <h1 className=" text-lg font-medium py-2">Speed</h1>
       <div className="flex items-center gap-2 rounded-lg">
-        {speeds.map((speed) => (
+        {speeds.map((currentSpeed) => (
           <button
-            key={speed}
-            onClick={() => setSelectedSpeed(speed)}
+            type="button"
+            key={currentSpeed}
+            onClick={() => setSpeed("speed", currentSpeed)}
             className={`w-20  py-2  rounded-full text-white ${
-              selectedSpeed === speed
+              speed === currentSpeed
                 ? "bg-indigo-600 ring-2 ring-indigo-500"
                 : "border-2 border-zinc-100"
             }`}
           >
-            {`${speed}x`}
+            {`${currentSpeed}x`}
           </button>
         ))}
       </div>

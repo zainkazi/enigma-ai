@@ -1,11 +1,9 @@
-"use client";
-
-import { useAvatarStore } from "@/store";
+import { useSpeechStore } from "@/store";
 import React from "react";
 
-const GenderSelector = () => {
-  const gender = useAvatarStore((state) => state.formData.gender);
-  const setGender = useAvatarStore((state) => state.setFormData);
+const SpeechGenderSelector = () => {
+  const gender = useSpeechStore((state) => state.formData.gender);
+  const setGender = useSpeechStore((state) => state.setFormData);
 
   return (
     <div>
@@ -34,4 +32,4 @@ const GenderSelector = () => {
   );
 };
 
-export default GenderSelector;
+export default SpeechGenderSelector;

@@ -1,11 +1,11 @@
 "use server";
 
-import { FormData } from "@/store";
+import { AvatarFormData } from "@/store";
 import axios from "axios";
 import supabase from "./supabase";
 import prisma from "@/utils/db";
 
-export async function createProject(formData: FormData, avatar: string) {
+export async function createProject(formData: AvatarFormData, avatar: string) {
   console.log("calling server action");
   const { ethnicity, ageGroup, gender, hairColor } = formData;
   const downloadedImage = await axios.get(avatar, {

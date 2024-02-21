@@ -1,7 +1,6 @@
-import { StaticImageData } from "next/image";
 import { create } from "zustand";
 
-export interface FormData {
+export interface AvatarFormData {
   ethnicity:
     | "Asian"
     | "Black/African descent"
@@ -27,13 +26,24 @@ export interface FormData {
 }
 
 interface AvatarStore {
-  formData: FormData;
+  formData: AvatarFormData;
   avatars: { url: string }[];
   selectedAvatar: string | null;
   setSelectedAvatar: (avatarUrl: string) => void;
   setAvatars: (avatarsList: { url: string }[]) => void;
   setFormData: (name: string, value: string | number) => void;
   resetForm: () => void;
+}
+
+export interface SpeechFormData {
+  gender: "Male" | "Female" | null;
+  speed: number;
+  speechInput: string;
+}
+
+interface SpeechStore {
+  formData: SpeechFormData;
+  setFormData: (name: string, value: string | number) => void;
 }
 
 export const useAvatarStore = create<AvatarStore>()((set) => ({
@@ -62,4 +72,16 @@ export const useAvatarStore = create<AvatarStore>()((set) => ({
     })),
 }));
 
-useAvatarStore.subscribe((state) => console.log("State updated:", state));
+export const useSpeechStore = create<SpeechStore>()((set) => ({
+  formData: {
+    gender: null,
+    speed: 1,
+    speechInput: "",
+  },
+  setFormData: (name, value) =>
+    set((state) => ({ formData: { ...state.formData, [name]: value } })),
+}));
+
+useSpeechStore.subscribe((state) =>
+  console.log("State updated:", state.formData)
+);

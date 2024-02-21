@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import EthnicityDropDownMenu from "./_components/EthnicityDropDownMenu";
 import AgeGroupDropDownMenu from "./_components/AgeGroupDropDownMenu";
 import HairColorPicker from "./_components/HairColorPicker";
-import GenderSelector from "./_components/GenderSelector";
+import AvatarGenderSelector from "./_components/AvatarGenderSelector";
 import CharacterQuantitySelector from "./_components/CharacterQuantitySelector";
 import { Button } from "@/components/ui/button";
 import { useAvatarStore } from "@/store";
@@ -39,7 +39,7 @@ function CharacterPrompt() {
       <EthnicityDropDownMenu />
       <AgeGroupDropDownMenu />
       <HairColorPicker />
-      <GenderSelector />
+      <AvatarGenderSelector />
       <CharacterQuantitySelector />
       {generated ? (
         <div className="space-x-6">
