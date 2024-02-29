@@ -11,19 +11,10 @@ import {
 } from "@/components/ui/select";
 
 import { useAvatarStore } from "@/store";
+import { ethnicities } from "@/validationSchemas";
 
 const EthnicityDropDownMenu = () => {
   const setEthnicity = useAvatarStore((state) => state.setFormData);
-
-  const ethnicities = [
-    "Asian",
-    "Black/African descent",
-    "Hispanic/Latino",
-    "White/Caucasian",
-    "Middle Eastern",
-    "Native American",
-    "Pacific Islander",
-  ];
 
   return (
     <div>

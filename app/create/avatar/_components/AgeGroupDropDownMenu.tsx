@@ -10,20 +10,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useAvatarStore } from "@/store";
+import { ageGroups } from "@/validationSchemas";
 
 const AgeGroupDropDownMenu = () => {
   const setAgeGroup = useAvatarStore((state) => state.setFormData);
-
-  const ageGroups = [
-    "0 - 12",
-    "13 - 17",
-    "18 - 24",
-    "25 - 34",
-    "35 - 44",
-    "45 - 54",
-    "55 - 64",
-    "65+",
-  ];
 
   return (
     <div>

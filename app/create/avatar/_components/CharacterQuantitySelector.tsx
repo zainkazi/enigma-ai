@@ -1,7 +1,7 @@
 "use client";
 
 import { useAvatarStore } from "@/store";
-import React, { useState } from "react";
+import React from "react";
 
 const CharacterQuantitySelector = () => {
   const numberOfCharacters = useAvatarStore(
