@@ -1,33 +1,42 @@
 import { z } from "zod";
 
+export const ethnicities = [
+  "Asian",
+  "Black/African descent",
+  "Hispanic/Latino",
+  "White/Caucasian",
+  "Middle Eastern",
+  "Native American",
+  "Pacific Islander",
+] as const;
+
+export const ageGroups = [
+  "0 - 12",
+  "13 - 17",
+  "18 - 24",
+  "25 - 34",
+  "35 - 44",
+  "45 - 54",
+  "55 - 64",
+  "65+",
+] as const;
+
+export const hairColors = [
+  "Black",
+  "Blue",
+  "Red",
+  "Yellow",
+  "Pink",
+  "Gray",
+] as const;
+
+export const genders = ["Male", "Female"] as const;
+
 export const AvatarSchema = z.object({
-  ethnicity: z
-    .enum([
-      "Asian",
-      "Black/African descent",
-      "Hispanic/Latino",
-      "White/Caucasian",
-      "Middle Eastern",
-      "Native American",
-      "Pacific Islander",
-    ])
-    .nullable(),
-  ageGroup: z
-    .enum([
-      "0 - 12",
-      "13 - 17",
-      "18 - 24",
-      "25 - 34",
-      "35 - 44",
-      "45 - 54",
-      "55 - 64",
-      "65+",
-    ])
-    .nullable(),
-  hairColor: z
-    .enum(["Black", "Blue", "Red", "Yellow", "Pink", "Gray"])
-    .nullable(),
-  gender: z.enum(["Male", "Female"]).nullable(),
+  ethnicity: z.enum(ethnicities).nullable(),
+  ageGroup: z.enum(ageGroups).nullable(),
+  hairColor: z.enum(hairColors).nullable(),
+  gender: z.enum(genders).nullable(),
   numberOfCharacters: z.number().int().min(1).max(4),
 });
 
