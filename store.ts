@@ -44,6 +44,8 @@ export interface SpeechFormData {
 interface SpeechStore {
   formData: SpeechFormData;
   setFormData: (name: string, value: string | number) => void;
+  speechUrl: string;
+  setSpeechUrl: (speechUrl: string) => void;
 }
 
 export const useAvatarStore = create<AvatarStore>()((set) => ({
@@ -80,8 +82,8 @@ export const useSpeechStore = create<SpeechStore>()((set) => ({
   },
   setFormData: (name, value) =>
     set((state) => ({ formData: { ...state.formData, [name]: value } })),
+  speechUrl: "",
+  setSpeechUrl: (speechUrl) => set(() => ({ speechUrl })),
 }));
 
-useSpeechStore.subscribe((state) =>
-  console.log("State updated:", state.formData)
-);
+useSpeechStore.subscribe((state) => console.log("State updated:", state));

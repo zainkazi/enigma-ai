@@ -1,10 +1,19 @@
-import React from "react";
+"use client";
+
+import { Card } from "@/components/ui/card";
+import { useSpeechStore } from "@/store";
 
 function SpeechTab() {
+  const speechUrl = useSpeechStore((state) => state.speechUrl);
+
+  if (!speechUrl) return null;
+
   return (
-    <section className="w-full h-[25%] bg-zinc-800 rounded-lg border border-zinc-700">
-      <div></div>
-    </section>
+    <Card className="p-8">
+      <audio className="w-full" controls>
+        <source src={speechUrl} type="audio/mpeg" />
+      </audio>
+    </Card>
   );
 }
 
