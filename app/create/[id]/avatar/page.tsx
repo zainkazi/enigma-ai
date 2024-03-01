@@ -1,5 +1,5 @@
-import CharacterPrompt from "../../../app/create/avatar/CharacterPrompt";
-import CharacterTab from "../../../app/create/avatar/CharacterTab";
+import CharacterPrompt from "./CharacterPrompt";
+import CharacterTab from "./CharacterTab";
 
 const AvatarPage = () => {
   return (

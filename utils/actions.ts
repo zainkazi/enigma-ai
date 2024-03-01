@@ -4,9 +4,20 @@ import { AvatarFormData } from "@/store";
 import axios from "axios";
 import supabase from "./supabase";
 import prisma from "@/utils/db";
+import { redirect } from "next/navigation";
 
-export async function createProject(formData: AvatarFormData, avatar: string) {
-  console.log("calling server action");
+export async function createProject() {
+  console.log("Creating project");
+
+  const newProject = await prisma.project.create({
+    data: {},
+  });
+
+  console.log(newProject);
+  redirect(`/create/${newProject.id}/avatar`);
+}
+
+export async function updateAvatar(formData: AvatarFormData, avatar: string) {
   const { ethnicity, ageGroup, gender, hairColor } = formData;
   const downloadedImage = await axios.get(avatar, {
     responseType: "arraybuffer",
@@ -28,14 +39,5 @@ export async function createProject(formData: AvatarFormData, avatar: string) {
     .getPublicUrl(fileName);
   console.log("Public url", storedImage.publicUrl);
 
-  const newProject = await prisma.project.create({
-    data: {
-      ethnicity: ethnicity as string,
-      ageGroup: ageGroup as string,
-      hairColor: hairColor as string,
-      gender: gender as string,
-      avatarUrl: storedImage.publicUrl,
-    },
-  });
-  console.log(newProject);
+  // avatarUrl: storedImage.publicUrl,
 }

@@ -5,10 +5,12 @@ generator client {
   provider = "prisma-client-js"
 }
 
+
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
 }
+        
 
 model User {
   id        String   @id @default(uuid())
@@ -52,12 +54,12 @@ model Project {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  ethnicity String
-  ageGroup  String
-  hairColor String
-  gender    String
+  ethnicity String?
+  ageGroup  String?
+  hairColor String?
+  gender    String?
 
-  avatarUrl    String  @db.Text
+  avatarUrl    String?  @db.Text
   speechPrompt String? @db.Text
   speechUrl    String? @db.Text
 
