@@ -9,6 +9,14 @@ function CharacterTab() {
   const selectedAvatar = useAvatarStore((state) => state.selectedAvatar);
   const setSelectedAvatar = useAvatarStore((state) => state.setSelectedAvatar);
   const avatars = useAvatarStore((state) => state.avatars);
+  const [disableSelection, setDisableSelection] = useState(false);
+
+  useEffect(() => {
+    if (avatars.length === 1) {
+      setSelectedAvatar(avatars[0].url);
+      setDisableSelection(true);
+    }
+  }, [avatars]);
 
   if (avatars.length === 0) return null;
 
@@ -20,6 +28,7 @@ function CharacterTab() {
           onClick={() => setSelectedAvatar(avatar.url)}
           className={`m-2 cursor-pointer ${
             selectedAvatar === avatar.url &&
+            !disableSelection &&
             "ring-2 ring-blue-500 rounded-lg border-2"
           }`}
         >
@@ -29,7 +38,7 @@ function CharacterTab() {
             src={avatar.url}
             width={500}
             height={500}
-            className="rounded-lg"
+            className="rounded-lg w-full"
           />
         </div>
       ))}

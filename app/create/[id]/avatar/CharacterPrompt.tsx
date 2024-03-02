@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import EthnicityDropDownMenu from "./_components/EthnicityDropDownMenu";
 import AgeGroupDropDownMenu from "./_components/AgeGroupDropDownMenu";
 import HairColorPicker from "./_components/HairColorPicker";
@@ -10,15 +10,38 @@ import { Button } from "@/components/ui/button";
 import { useAvatarStore } from "@/store";
 import axios from "axios";
 import { ArrowRight, Loader2 } from "lucide-react";
-import { createProject } from "@/utils/actions";
+import { fetchProject, updateAvatar } from "@/utils/actions";
+import { useParams } from "next/navigation";
+import { useQuery } from "@tanstack/react-query";
 
-function CharacterPrompt() {
+const CharacterPrompt = () => {
+  const params = useParams();
   const formData = useAvatarStore((state) => state.formData);
+  const avatars = useAvatarStore((state) => state.avatars);
   const setAvatars = useAvatarStore((state) => state.setAvatars);
+  const setFormData = useAvatarStore((state) => state.setFormData);
   const selectedAvatar = useAvatarStore((state) => state.selectedAvatar);
   const [generating, setGenerating] = useState(false);
   const [generated, setGenerated] = useState(false);
-  const [creatingProject, setCreatingProject] = useState(false);
+  const [uploadingAvatar, setUploadingAvatar] = useState(false);
+
+  const { data } = useQuery({
+    queryKey: ["project"],
+    queryFn: async () => await fetchProject(params.id as string),
+  });
+
+  useEffect(() => {
+    if (data) {
+      setFormData("ethnicity", data.ethnicity);
+      setFormData("ageGroup", data.ageGroup);
+      setFormData("hairColor", data.hairColor);
+      setFormData("gender", data.gender);
+      console.log(data);
+    }
+    if (data?.avatarUrl) {
+      setAvatars([{ url: data.avatarUrl }]);
+    }
+  }, [data]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -41,7 +64,7 @@ function CharacterPrompt() {
       <HairColorPicker />
       <AvatarGenderSelector />
       <CharacterQuantitySelector />
-      {generated ? (
+      {generated || data?.avatarUrl ? (
         <div className="space-x-6">
           <Button disabled={generating} type="submit">
             {generating ? "Generating" : "Regenerate"}
@@ -49,15 +72,22 @@ function CharacterPrompt() {
           </Button>
           <Button
             type="button"
-            disabled={generating || selectedAvatar == null || creatingProject}
+            disabled={
+              avatars.length !== 1 &&
+              (generating || selectedAvatar == null || uploadingAvatar)
+            }
             onClick={async () => {
-              setCreatingProject(true);
-              await createProject(formData, selectedAvatar!);
-              setCreatingProject(false);
+              setUploadingAvatar(true);
+              await updateAvatar(
+                formData,
+                selectedAvatar!,
+                params.id as string
+              );
+              setUploadingAvatar(false);
             }}
           >
             Next{" "}
-            {creatingProject ? (
+            {uploadingAvatar ? (
               <Loader2 className="ml-2 h-4 w-4 animate-spin" />
             ) : (
               <ArrowRight className="h-4 w-4 ml-2" />
@@ -72,6 +102,6 @@ function CharacterPrompt() {
       )}
     </form>
   );
-}
+};
 
 export default CharacterPrompt;

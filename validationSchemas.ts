@@ -40,7 +40,7 @@ export const AvatarSchema = z.object({
   numberOfCharacters: z.number().int().min(1).max(4),
 });
 
-export const SpeehSchema = z.object({
+export const SpeechSchema = z.object({
   gender: z.enum(["Male", "Female"]).nullable(),
   speed: z.number().multipleOf(0.25).min(1).max(2),
   speechInput: z.string().min(1).max(4000),

@@ -1,10 +1,13 @@
 "use server";
 
-import { AvatarFormData } from "@/store";
 import axios from "axios";
 import supabase from "./supabase";
 import prisma from "@/utils/db";
 import { redirect } from "next/navigation";
+import { AvatarSchema } from "@/validationSchemas";
+import { z } from "zod";
+
+type AvatarFormData = z.infer<typeof AvatarSchema>;
 
 export async function createProject() {
   console.log("Creating project");
@@ -13,31 +16,62 @@ export async function createProject() {
     data: {},
   });
 
-  console.log(newProject);
   redirect(`/create/${newProject.id}/avatar`);
 }
 
-export async function updateAvatar(formData: AvatarFormData, avatar: string) {
-  const { ethnicity, ageGroup, gender, hairColor } = formData;
-  const downloadedImage = await axios.get(avatar, {
-    responseType: "arraybuffer",
+export async function fetchProject(projectId: string) {
+  const project = await prisma.project.findUnique({
+    where: {
+      id: projectId,
+    },
   });
 
-  const fileName = `public/${Date.now()}.png`;
+  return project;
+}
 
-  const { data, error } = await supabase.storage
-    .from("avatars")
-    .upload(fileName, downloadedImage.data, {
-      contentType: "image/png",
+export async function updateAvatar(
+  formData: AvatarFormData,
+  avatar: string,
+  projectId: string
+) {
+  const oldProject = await prisma.project.findUnique({
+    where: {
+      id: projectId,
+    },
+  });
+
+  if (oldProject?.avatarUrl !== avatar) {
+    const { ethnicity, ageGroup, gender, hairColor } = formData;
+    const downloadedImage = await axios.get(avatar, {
+      responseType: "arraybuffer",
     });
+    const fileName = `public/${Date.now()}.png`;
 
-  if (error) return "Error uploading image";
-  console.log("Data", data);
+    const { data, error } = await supabase.storage
+      .from("avatars")
+      .upload(fileName, downloadedImage.data, {
+        contentType: "image/png",
+      });
 
-  const { data: storedImage } = supabase.storage
-    .from("avatars")
-    .getPublicUrl(fileName);
-  console.log("Public url", storedImage.publicUrl);
+    if (error) return "Error uploading image";
 
-  // avatarUrl: storedImage.publicUrl,
+    const { data: storedImage } = supabase.storage
+      .from("avatars")
+      .getPublicUrl(fileName);
+
+    const updatedProject = await prisma.project.update({
+      where: {
+        id: projectId,
+      },
+      data: {
+        ethnicity,
+        ageGroup,
+        gender,
+        hairColor,
+        avatarUrl: storedImage.publicUrl,
+      },
+    });
+  }
+
+  redirect(`/create/${oldProject?.id}/speech`);
 }

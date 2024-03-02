@@ -14,12 +14,16 @@ import { useAvatarStore } from "@/store";
 import { ethnicities } from "@/validationSchemas";
 
 const EthnicityDropDownMenu = () => {
+  const selectedEthnicity = useAvatarStore((state) => state.formData.ethnicity);
   const setEthnicity = useAvatarStore((state) => state.setFormData);
 
   return (
     <div>
       <h1 className="text-lg font-medium py-2">Ethnicty</h1>
-      <Select onValueChange={(value) => setEthnicity("ethnicity", value)}>
+      <Select
+        defaultValue={selectedEthnicity || ""}
+        onValueChange={(value) => setEthnicity("ethnicity", value)}
+      >
         <SelectTrigger>
           <SelectValue placeholder="Select ethnicity" />
         </SelectTrigger>

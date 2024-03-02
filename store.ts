@@ -1,29 +1,10 @@
+import { z } from "zod";
 import { create } from "zustand";
+import { AvatarSchema, SpeechSchema } from "./validationSchemas";
 
-export interface AvatarFormData {
-  ethnicity:
-    | "Asian"
-    | "Black/African descent"
-    | "Hispanic/Latino"
-    | "White/Caucasian"
-    | "Middle Eastern"
-    | "Native American"
-    | "Pacific Islander"
-    | null;
-  ageGroup:
-    | "0 - 12"
-    | "13 - 17"
-    | "18 - 24"
-    | "25 - 34"
-    | "35 - 44"
-    | "45 - 54"
-    | "55 - 64"
-    | "65+"
-    | null;
-  hairColor: "Black" | "Blue" | "Red" | "Yellow" | "Pink" | "Gray" | null;
-  gender: "Male" | "Female" | null;
-  numberOfCharacters: 1 | 2 | 3 | 4;
-}
+type AvatarFormData = z.infer<typeof AvatarSchema>;
+
+type SpeechFormData = z.infer<typeof SpeechSchema>;
 
 interface AvatarStore {
   formData: AvatarFormData;
@@ -31,14 +12,8 @@ interface AvatarStore {
   selectedAvatar: string | null;
   setSelectedAvatar: (avatarUrl: string) => void;
   setAvatars: (avatarsList: { url: string }[]) => void;
-  setFormData: (name: string, value: string | number) => void;
+  setFormData: (name: string, value: string | number | null) => void;
   resetForm: () => void;
-}
-
-export interface SpeechFormData {
-  gender: "Male" | "Female" | null;
-  speed: number;
-  speechInput: string;
 }
 
 interface SpeechStore {
@@ -86,4 +61,4 @@ export const useSpeechStore = create<SpeechStore>()((set) => ({
   setSpeechUrl: (speechUrl) => set(() => ({ speechUrl })),
 }));
 
-useSpeechStore.subscribe((state) => console.log("State updated:", state));
+useAvatarStore.subscribe((state) => console.log("State updated:", state));

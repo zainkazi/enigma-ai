@@ -1,7 +1,7 @@
 "use client";
 
 import { createProject } from "@/utils/actions";
-import React, { useState } from "react";
+import React from "react";
 
 function NavBar() {
   return (

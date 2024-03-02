@@ -24,8 +24,8 @@ const HairColorPicker = () => {
           <button
             type="button"
             key={color.name}
-            className={`w-6 h-6 rounded-full focus:outline-none focus:ring focus:ring-offset-1 ${
-              hairColor === color.value ? "ring ring-white" : ""
+            className={`w-6 h-6 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 ${
+              hairColor == color.value ? "ring ring-white" : ""
             } ${color.value}`}
             onClick={() => setHairColor("hairColor", color.name)}
             aria-label={`Select ${color.name}`}
