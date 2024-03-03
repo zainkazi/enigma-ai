@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { create } from "zustand";
 import { AvatarSchema, SpeechSchema } from "./validationSchemas";
+import { Decimal } from "@prisma/client/runtime/library";
 
 type AvatarFormData = z.infer<typeof AvatarSchema>;
 
@@ -18,7 +19,7 @@ interface AvatarStore {
 
 interface SpeechStore {
   formData: SpeechFormData;
-  setFormData: (name: string, value: string | number | null) => void;
+  setFormData: (name: string, value: string | number | null | Decimal) => void;
   speechUrl: string;
   setSpeechUrl: (speechUrl: string) => void;
 }

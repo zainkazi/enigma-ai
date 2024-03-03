@@ -45,7 +45,6 @@ const CharacterPrompt = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Generating");
 
     setGenerating(true);
     const generatedAvatars = await axios.post("/api/avatar", formData);
@@ -53,8 +52,6 @@ const CharacterPrompt = () => {
     setGenerated(true);
     setGenerating(false);
     setAvatars(generatedAvatars.data.data);
-
-    console.log("Generated");
   };
 
   return (
