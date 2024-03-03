@@ -5,12 +5,10 @@ generator client {
   provider = "prisma-client-js"
 }
 
-
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
-        
 
 model User {
   id        String   @id @default(uuid())
@@ -58,9 +56,11 @@ model Project {
   ageGroup  String?
   hairColor String?
   gender    String?
+  avatarUrl String? @db.Text
 
-  avatarUrl    String?  @db.Text
   speechPrompt String? @db.Text
+  speechSpeed  Decimal? @db.Decimal(3, 2) @default(1)
+  speechGender String? @db.Text
   speechUrl    String? @db.Text
 
   // userId String @unique

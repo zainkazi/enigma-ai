@@ -21,7 +21,7 @@ const EthnicityDropDownMenu = () => {
     <div>
       <h1 className="text-lg font-medium py-2">Ethnicty</h1>
       <Select
-        defaultValue={selectedEthnicity || ""}
+        value={selectedEthnicity || ""}
         onValueChange={(value) => setEthnicity("ethnicity", value)}
       >
         <SelectTrigger>

@@ -20,7 +20,7 @@ const AgeGroupDropDownMenu = () => {
     <div>
       <h1 className="text-lg font-medium py-2">Age Group</h1>
       <Select
-        defaultValue={selectedAgeGroup || ""}
+        value={selectedAgeGroup || ""}
         onValueChange={(value) => setAgeGroup("ageGroup", value)}
       >
         <SelectTrigger>

@@ -18,7 +18,7 @@ interface AvatarStore {
 
 interface SpeechStore {
   formData: SpeechFormData;
-  setFormData: (name: string, value: string | number) => void;
+  setFormData: (name: string, value: string | number | null) => void;
   speechUrl: string;
   setSpeechUrl: (speechUrl: string) => void;
 }
@@ -61,4 +61,9 @@ export const useSpeechStore = create<SpeechStore>()((set) => ({
   setSpeechUrl: (speechUrl) => set(() => ({ speechUrl })),
 }));
 
-useAvatarStore.subscribe((state) => console.log("State updated:", state));
+useAvatarStore.subscribe((state) =>
+  console.log("Avatar Store updated:", state)
+);
+useSpeechStore.subscribe((state) =>
+  console.log("Speech Store updated:", state)
+);

@@ -36,12 +36,12 @@ const CharacterPrompt = () => {
       setFormData("ageGroup", data.ageGroup);
       setFormData("hairColor", data.hairColor);
       setFormData("gender", data.gender);
-      console.log(data);
     }
     if (data?.avatarUrl) {
       setAvatars([{ url: data.avatarUrl }]);
+      setGenerated(true);
     }
-  }, [data]);
+  }, [data, setFormData, setAvatars]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

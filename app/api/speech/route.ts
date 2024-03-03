@@ -1,10 +1,10 @@
 import openai from "@/utils/openai";
 import supabase from "@/utils/supabase";
-import prisma from "@/utils/db";
 import { NextRequest, NextResponse } from "next/server";
+import prisma from "@/utils/db";
 
 export const POST = async (request: NextRequest) => {
-  const { gender, speed, speechInput } = await request.json();
+  const { gender, speed, speechInput, projectId } = await request.json();
   console.log("Generating Speech");
   const mp3 = await openai.audio.speech.create({
     model: "tts-1",
@@ -32,5 +32,17 @@ export const POST = async (request: NextRequest) => {
     .from("speeches")
     .getPublicUrl(speechFileName);
 
-  return NextResponse.json(speechUrl);
+  const updatedProject = await prisma.project.update({
+    where: {
+      id: projectId,
+    },
+    data: {
+      speechGender: gender,
+      speechSpeed: speed,
+      speechPrompt: speechInput,
+      speechUrl: speechUrl.data.publicUrl,
+    },
+  });
+
+  return NextResponse.json(updatedProject);
 };

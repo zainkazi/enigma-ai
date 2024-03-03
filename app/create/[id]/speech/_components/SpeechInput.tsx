@@ -11,6 +11,7 @@ const SpeechInput = () => {
       <Textarea
         placeholder="Enter your speech..."
         onChange={(e) => setSpeechInput("speechInput", e.target.value)}
+        value={speechInput}
         className="h-[40dvh]"
       />
     </div>
