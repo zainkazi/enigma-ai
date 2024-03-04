@@ -1,7 +1,6 @@
 "use client";
 
 import { createProject } from "@/utils/actions";
-import React from "react";
 
 function NavBar() {
   return (

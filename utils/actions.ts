@@ -6,19 +6,27 @@ import prisma from "@/utils/db";
 import { redirect } from "next/navigation";
 import { AvatarSchema } from "@/validationSchemas";
 import { z } from "zod";
+import { getUserByClerkId } from "./getUserByClerkId";
+import { revalidatePath } from "next/cache";
 
 type AvatarFormData = z.infer<typeof AvatarSchema>;
 
+// Create new project
 export async function createProject() {
   console.log("Creating project");
+  const user = await getUserByClerkId();
 
   const newProject = await prisma.project.create({
-    data: {},
+    data: {
+      userId: user.id,
+    },
   });
 
+  revalidatePath("/dashboard");
   redirect(`/create/${newProject.id}/avatar`);
 }
 
+// Fetch existing project
 export async function fetchProject(projectId: string) {
   const project = await prisma.project.findUnique({
     where: {
