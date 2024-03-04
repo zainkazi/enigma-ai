@@ -11,11 +11,12 @@ export const POST = async (request: NextRequest) => {
     voice: gender === "Male" ? "alloy" : "nova",
     input: speechInput,
     speed: speed,
+    response_format: "wav",
   });
 
   const speech = Buffer.from(await mp3.arrayBuffer());
 
-  const speechFileName = `public/${Date.now()}.mp3`;
+  const speechFileName = `public/${Date.now()}.wav`;
   console.log(speechFileName);
 
   const { data, error } = await supabase.storage

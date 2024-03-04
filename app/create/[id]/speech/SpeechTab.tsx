@@ -11,7 +11,7 @@ function SpeechTab() {
   return (
     <Card className="p-8">
       <audio className="w-full" controls>
-        <source src={speechUrl} type="audio/mpeg" />
+        <source src={speechUrl} type="audio/wav" />
       </audio>
     </Card>
   );
