@@ -13,7 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { createProject } from "@/utils/actions";
-import { Loader2 } from "lucide-react";
+import { Loader2, PlusCircle } from "lucide-react";
 import { useState } from "react";
 
 const CreateProjectDialog = () => {
@@ -23,7 +23,9 @@ const CreateProjectDialog = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="w-full">New Project</Button>
+        <Button className="w-full">
+          <PlusCircle className="mr-2 w-4" /> New Project
+        </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>

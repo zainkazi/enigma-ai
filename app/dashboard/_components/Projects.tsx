@@ -22,7 +22,7 @@ const getProjects = async () => {
   return projects;
 };
 
-async function HeroRight() {
+async function Projects() {
   const projects = await getProjects();
 
   if (projects.length === 0) return <h1>No projects yet</h1>;
@@ -31,7 +31,7 @@ async function HeroRight() {
     <section>
       <div className="space-y-2">
         <div className="w-full h-[1px] bg-zinc-600" />
-        <h1 className="text-lg py-6 font-semibold">Recent</h1>
+        <h1 className="text-lg py-6 font-semibold">Your Projects</h1>
       </div>
       <div>
         <div className="grid grid-cols-3 gap-8">
@@ -62,4 +62,4 @@ async function HeroRight() {
   );
 }
 
-export default HeroRight;
+export default Projects;
