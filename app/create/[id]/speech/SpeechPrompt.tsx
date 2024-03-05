@@ -28,7 +28,7 @@ function SpeechPrompt() {
 
   useEffect(() => {
     if (data) {
-      setFormData("speed", data.speechSpeed);
+      setFormData("speed", Number(data.speechSpeed));
       setFormData("gender", data.speechGender);
       setFormData("speechInput", data.speechPrompt);
     }

@@ -1,7 +1,15 @@
 import { getUserByClerkId } from "@/utils/getUserByClerkId";
 import prisma from "@/utils/db";
-import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import Link from "next/link";
+import { Project } from "@prisma/client";
+import { Trash2 } from "lucide-react";
 
 const getProjects = async () => {
   const user = await getUserByClerkId();
@@ -27,12 +35,24 @@ async function HeroRight() {
       </div>
       <div>
         <div className="grid grid-cols-3 gap-8">
-          {projects.map((project) => (
+          {projects.map((project: Project) => (
             <Link href={`/create/${project.id}/avatar`} key={project.id}>
-              <Card>
+              <Card className="hover:bg-slate-900 transition-colors">
                 <CardHeader>
-                  <CardTitle>{project.id}</CardTitle>
+                  <div className="flex items-center justify-between">
+                    <CardTitle>{project.name}</CardTitle>
+                    <Trash2 color="red  " className="transition-colors" />
+                  </div>
+                  <CardDescription>
+                    {project.createdAt.toDateString()}
+                  </CardDescription>
                 </CardHeader>
+                <CardContent>
+                  <p>
+                    {project.ethnicity} {project.gender} with{" "}
+                    {project.hairColor} hair
+                  </p>
+                </CardContent>
               </Card>
             </Link>
           ))}

@@ -39,7 +39,7 @@ export const POST = async (request: NextRequest) => {
     },
     data: {
       speechGender: gender,
-      speechSpeed: speed,
+      speechSpeed: speed.toString(),
       speechPrompt: speechInput,
       speechUrl: speechUrl.data.publicUrl,
     },

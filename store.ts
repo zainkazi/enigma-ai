@@ -19,7 +19,7 @@ interface AvatarStore {
 
 interface SpeechStore {
   formData: SpeechFormData;
-  setFormData: (name: string, value: string | number | null | Decimal) => void;
+  setFormData: (name: string, value: string | number | null) => void;
   speechUrl: string;
   setSpeechUrl: (speechUrl: string) => void;
 }

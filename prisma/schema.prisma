@@ -40,6 +40,7 @@ model Plan {
 
   userId String @unique
   user   User   @relation(fields: [userId], references: [id])
+
 }
 
 enum PlanName {
@@ -53,6 +54,8 @@ model Project {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  name String @default("Project")
+
   ethnicity String?
   ageGroup  String?
   hairColor String?
@@ -60,10 +63,10 @@ model Project {
   avatarUrl String? @db.Text
 
   speechPrompt String?  @db.Text
-  speechSpeed  Decimal? @default(1) @db.Decimal(3, 2)
+  speechSpeed  String?
   speechGender String?  @db.Text
   speechUrl    String?  @db.Text
 
-  userId String @unique
+  userId String
   user   User   @relation(fields: [userId], references: [id])
 }

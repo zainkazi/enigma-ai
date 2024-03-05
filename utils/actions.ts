@@ -12,12 +12,13 @@ import { revalidatePath } from "next/cache";
 type AvatarFormData = z.infer<typeof AvatarSchema>;
 
 // Create new project
-export async function createProject() {
+export async function createProject(projectName: string) {
   console.log("Creating project");
   const user = await getUserByClerkId();
 
   const newProject = await prisma.project.create({
     data: {
+      name: projectName,
       userId: user.id,
     },
   });

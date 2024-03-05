@@ -1,4 +1,4 @@
-import CreateProject from "./CreateProject";
+import CreateProjectDialog from "./CreateProjectDialog";
 
 function NavBar() {
   return (
@@ -6,7 +6,7 @@ function NavBar() {
       <div className="w-full">
         <div className="space-y-4 w-[100%]">
           <h1 className="text-center text-4xl">ENIGMA AI</h1>
-          <CreateProject />
+          <CreateProjectDialog />
         </div>
         <nav></nav>
       </div>

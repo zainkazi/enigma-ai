@@ -63,16 +63,13 @@ const CharacterPrompt = () => {
       <CharacterQuantitySelector />
       {generated || data?.avatarUrl ? (
         <div className="space-x-6">
-          <Button disabled={generating} type="submit">
+          <Button disabled={generating || uploadingAvatar} type="submit">
             {generating ? "Generating" : "Regenerate"}
             {generating && <Loader2 className="ml-2 h-4 w-4 animate-spin" />}
           </Button>
           <Button
             type="button"
-            disabled={
-              avatars.length !== 1 &&
-              (generating || selectedAvatar == null || uploadingAvatar)
-            }
+            disabled={generating || selectedAvatar == null || uploadingAvatar}
             onClick={async () => {
               setUploadingAvatar(true);
               await updateAvatar(
