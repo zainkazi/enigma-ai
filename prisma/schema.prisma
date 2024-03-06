@@ -40,7 +40,6 @@ model Plan {
 
   userId String @unique
   user   User   @relation(fields: [userId], references: [id])
-
 }
 
 enum PlanName {
@@ -62,10 +61,11 @@ model Project {
   gender    String?
   avatarUrl String? @db.Text
 
-  speechPrompt String?  @db.Text
+  speechPrompt String? @db.Text
   speechSpeed  String?
-  speechGender String?  @db.Text
-  speechUrl    String?  @db.Text
+  speechGender String? @db.Text
+  speechUrl    String? @db.Text
+  videoUrl     String? @db.Text
 
   userId String
   user   User   @relation(fields: [userId], references: [id])
