@@ -35,6 +35,10 @@ export async function fetchProject(projectId: string) {
     },
   });
 
+  if (!project) {
+    redirect("/dashboard");
+  }
+
   return project;
 }
 

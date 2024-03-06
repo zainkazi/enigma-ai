@@ -18,6 +18,9 @@ const getProjects = async () => {
     where: {
       userId: user.id,
     },
+    orderBy: {
+      createdAt: "desc",
+    },
   });
   return projects;
 };
@@ -37,7 +40,7 @@ async function Projects() {
         <div className="grid grid-cols-3 gap-8">
           {projects.map((project: Project) => (
             <Link href={`/create/${project.id}/avatar`} key={project.id}>
-              <Card className="hover:bg-slate-900 transition-colors">
+              <Card className="hover:bg-slate-900 h-48 transition-colors">
                 <CardHeader>
                   <div className="flex items-center justify-between">
                     <CardTitle>{project.name}</CardTitle>
@@ -47,12 +50,14 @@ async function Projects() {
                     {project.createdAt.toDateString()}
                   </CardDescription>
                 </CardHeader>
-                <CardContent>
-                  <p>
-                    {project.ethnicity} {project.gender} with{" "}
-                    {project.hairColor} hair
-                  </p>
-                </CardContent>
+                {project.ethnicity && (
+                  <CardContent>
+                    <p>
+                      {project.ethnicity} {project.gender} with{" "}
+                      {project.hairColor} hair
+                    </p>
+                  </CardContent>
+                )}
               </Card>
             </Link>
           ))}
