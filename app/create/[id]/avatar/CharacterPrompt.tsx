@@ -13,6 +13,16 @@ import { ArrowRight, Loader2 } from "lucide-react";
 import { fetchProject, updateAvatar } from "@/utils/actions";
 import { useParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
+import { AvatarSchema, ageGroups } from "@/validationSchemas";
+
+type FormErrors = {
+  ethnicity?: { _errors: string[] };
+  ageGroup?: { _errors: string[] };
+  gender?: { _errors: string[] };
+  hairColor?: { _errors: string[] };
+};
+
+const errorClassnames = "text-red-500 text-sm mt-2";
 
 const CharacterPrompt = () => {
   const params = useParams();
@@ -24,6 +34,7 @@ const CharacterPrompt = () => {
   const [generating, setGenerating] = useState(false);
   const [generated, setGenerated] = useState(false);
   const [uploadingAvatar, setUploadingAvatar] = useState(false);
+  const [validationErrors, setValidationErrors] = useState<FormErrors>({});
 
   const { data } = useQuery({
     queryKey: ["project"],
@@ -46,21 +57,50 @@ const CharacterPrompt = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    setGenerating(true);
-    const generatedAvatars = await axios.post("/api/avatar", formData);
+    const validationResult = AvatarSchema.safeParse(formData);
 
-    setGenerated(true);
-    setGenerating(false);
-    setAvatars(generatedAvatars.data.data);
+    if (validationResult.success) {
+      setValidationErrors({});
+      // setGenerating(true);
+      // const generatedAvatars = await axios.post("/api/avatar", formData);
+      // setGenerated(true);
+      // setGenerating(false);
+      // setAvatars(generatedAvatars.data.data);
+    } else {
+      setValidationErrors(validationResult.error.format());
+      console.log(validationResult.error.format());
+    }
   };
 
   return (
     <form className="space-y-6" onSubmit={handleSubmit}>
-      <EthnicityDropDownMenu />
-      <AgeGroupDropDownMenu />
-      <HairColorPicker />
-      <AvatarGenderSelector />
-      <CharacterQuantitySelector />
+      <div>
+        <EthnicityDropDownMenu />
+        {validationErrors.ethnicity && (
+          <p className={errorClassnames}>Please select an ethnicity</p>
+        )}
+      </div>
+      <div>
+        <AgeGroupDropDownMenu />
+        {validationErrors.ageGroup && (
+          <p className={errorClassnames}>Please select an age group</p>
+        )}
+      </div>
+      <div>
+        <HairColorPicker />
+        {validationErrors.hairColor && (
+          <p className={errorClassnames}>Please select a hair color</p>
+        )}
+      </div>
+      <div>
+        <AvatarGenderSelector />
+        {validationErrors.gender && (
+          <p className={errorClassnames}>Please select a gender</p>
+        )}
+      </div>
+      <div>
+        <CharacterQuantitySelector />
+      </div>
       {generated || data?.avatarUrl ? (
         <div className="space-x-6">
           <Button disabled={generating || uploadingAvatar} type="submit">

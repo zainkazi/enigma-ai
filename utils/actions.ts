@@ -4,12 +4,9 @@ import axios from "axios";
 import supabase from "./supabase";
 import prisma from "@/utils/db";
 import { redirect } from "next/navigation";
-import { AvatarSchema } from "@/validationSchemas";
-import { z } from "zod";
 import { getUserByClerkId } from "./getUserByClerkId";
 import { revalidatePath } from "next/cache";
-
-type AvatarFormData = z.infer<typeof AvatarSchema>;
+import { AvatarFormData } from "@/store";
 
 // Create new project
 export async function createProject(projectName: string) {

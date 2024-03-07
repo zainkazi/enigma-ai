@@ -33,15 +33,15 @@ export const hairColors = [
 export const genders = ["Male", "Female"] as const;
 
 export const AvatarSchema = z.object({
-  ethnicity: z.enum(ethnicities).nullable(),
-  ageGroup: z.enum(ageGroups).nullable(),
-  hairColor: z.enum(hairColors).nullable(),
-  gender: z.enum(genders).nullable(),
+  ethnicity: z.enum(ethnicities),
+  ageGroup: z.enum(ageGroups),
+  hairColor: z.enum(hairColors),
+  gender: z.enum(genders),
   numberOfCharacters: z.number().int().min(1).max(4),
 });
 
 export const SpeechSchema = z.object({
-  gender: z.enum(["Male", "Female"]).nullable(),
+  gender: z.enum(["Male", "Female"]),
   speed: z.number().multipleOf(0.25).min(1).max(2),
   speechInput: z.string().min(1).max(4000),
 });

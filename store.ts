@@ -1,11 +1,20 @@
 import { z } from "zod";
 import { create } from "zustand";
 import { AvatarSchema, SpeechSchema } from "./validationSchemas";
-import { Decimal } from "@prisma/client/runtime/library";
 
-type AvatarFormData = z.infer<typeof AvatarSchema>;
+export type AvatarFormData = {
+  ethnicity: string | null;
+  ageGroup: string | null;
+  hairColor: string | null;
+  gender: string | null;
+  numberOfCharacters: number;
+};
 
-type SpeechFormData = z.infer<typeof SpeechSchema>;
+export type SpeechFormData = {
+  gender: string | null;
+  speed: number | null;
+  speechInput: string;
+};
 
 interface AvatarStore {
   formData: AvatarFormData;
@@ -14,7 +23,6 @@ interface AvatarStore {
   setSelectedAvatar: (avatarUrl: string) => void;
   setAvatars: (avatarsList: { url: string }[]) => void;
   setFormData: (name: string, value: string | number | null) => void;
-  resetForm: () => void;
 }
 
 interface SpeechStore {
@@ -38,16 +46,6 @@ export const useAvatarStore = create<AvatarStore>()((set) => ({
   setAvatars: (avatars) => set(() => ({ avatars })),
   setFormData: (name, value) =>
     set((state) => ({ formData: { ...state.formData, [name]: value } })),
-  resetForm: () =>
-    set(() => ({
-      formData: {
-        ethnicity: null,
-        ageGroup: null,
-        hairColor: null,
-        gender: null,
-        numberOfCharacters: 1,
-      },
-    })),
 }));
 
 export const useSpeechStore = create<SpeechStore>()((set) => ({
@@ -63,8 +61,8 @@ export const useSpeechStore = create<SpeechStore>()((set) => ({
 }));
 
 useAvatarStore.subscribe((state) =>
-  console.log("Avatar Store updated:", state)
+  console.log("Avatar Store updated:", state.formData)
 );
 useSpeechStore.subscribe((state) =>
-  console.log("Speech Store updated:", state)
+  console.log("Speech Store updated:", state.formData)
 );
