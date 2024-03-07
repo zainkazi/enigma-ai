@@ -22,7 +22,7 @@ type FormErrors = {
   hairColor?: { _errors: string[] };
 };
 
-const errorClassnames = "text-red-500 text-sm mt-2";
+export const errorClassnames = "text-red-500 text-sm mt-2";
 
 const CharacterPrompt = () => {
   const params = useParams();

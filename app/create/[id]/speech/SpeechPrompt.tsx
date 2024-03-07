@@ -12,14 +12,23 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchProject } from "@/utils/actions";
 import { Project } from "@prisma/client";
 import { ArrowRight, Loader2 } from "lucide-react";
+import { SpeechSchema } from "@/validationSchemas";
+import { errorClassnames } from "../avatar/CharacterPrompt";
 
-function SpeechPrompt() {
+type FormErrors = {
+  gender?: { _errors: string[] };
+  speed?: { _errors: string[] };
+  speechInput?: { _errors: string[] };
+};
+
+const SpeechPrompt = () => {
   const params = useParams();
   const formData = useSpeechStore((state) => state.formData);
   const setFormData = useSpeechStore((state) => state.setFormData);
   const setSpeechUrl = useSpeechStore((state) => state.setSpeechUrl);
   const [generated, setGenerated] = useState(false);
   const [generating, setGenerating] = useState(false);
+  const [validationErrors, setValidationErrors] = useState<FormErrors>({});
 
   const { data } = useQuery({
     queryKey: ["speech"],
@@ -41,25 +50,46 @@ function SpeechPrompt() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    setGenerating(true);
-    const speech = await axios.post<Project>("/api/speech", {
-      ...formData,
-      projectId: params.id,
-    });
+    const validationResult = SpeechSchema.safeParse(formData);
 
-    setGenerating(false);
-    setGenerated(true);
-    setSpeechUrl(speech.data.speechUrl || "");
+    if (validationResult.success) {
+      setValidationErrors({});
+      setGenerating(true);
+      const speech = await axios.post<Project>("/api/speech", {
+        ...formData,
+        projectId: params.id,
+      });
+
+      setGenerating(false);
+      setGenerated(true);
+      setSpeechUrl(speech.data.speechUrl || "");
+    } else {
+      setValidationErrors(validationResult.error.format());
+      console.log(validationResult.error.format());
+    }
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-10">
       <div className="flex gap-24">
-        <SpeechGenderSelector />
-        <SpeedSelector />
+        <div>
+          <SpeechGenderSelector />
+          {validationErrors.gender && (
+            <p className={errorClassnames}>Please select a gender</p>
+          )}
+        </div>
+        <div>
+          <SpeedSelector />
+          {validationErrors.speed && (
+            <p className={errorClassnames}>Please select a speed value</p>
+          )}
+        </div>
       </div>
       <div>
         <SpeechInput />
+        {validationErrors.speechInput && (
+          <p className={errorClassnames}>Speech cannot be empty</p>
+        )}
       </div>
       <div className="flex justify-end gap-4">
         {generated ? (
@@ -81,6 +111,6 @@ function SpeechPrompt() {
       </div>
     </form>
   );
-}
+};
 
 export default SpeechPrompt;

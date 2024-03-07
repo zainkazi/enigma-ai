@@ -60,9 +60,9 @@ export const useSpeechStore = create<SpeechStore>()((set) => ({
   setSpeechUrl: (speechUrl) => set(() => ({ speechUrl })),
 }));
 
-useAvatarStore.subscribe((state) =>
-  console.log("Avatar Store updated:", state.formData)
-);
-useSpeechStore.subscribe((state) =>
-  console.log("Speech Store updated:", state.formData)
-);
+// useAvatarStore.subscribe((state) =>
+//   console.log("Avatar Store updated:", state.formData)
+// );
+// useSpeechStore.subscribe((state) =>
+//   console.log("Speech Store updated:", state.formData)
+// );
