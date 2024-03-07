@@ -61,11 +61,11 @@ const CharacterPrompt = () => {
 
     if (validationResult.success) {
       setValidationErrors({});
-      // setGenerating(true);
-      // const generatedAvatars = await axios.post("/api/avatar", formData);
-      // setGenerated(true);
-      // setGenerating(false);
-      // setAvatars(generatedAvatars.data.data);
+      setGenerating(true);
+      const generatedAvatars = await axios.post("/api/avatar", formData);
+      setGenerated(true);
+      setGenerating(false);
+      setAvatars(generatedAvatars.data.data);
     } else {
       setValidationErrors(validationResult.error.format());
       console.log(validationResult.error.format());
