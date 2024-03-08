@@ -23,15 +23,10 @@ async function DashboardPage() {
   // }
 
   return (
-    <div className="grid grid-cols-5">
-      <Card className="col-span-1 h-screen px-4 py-10">
-        <NavBar />
-      </Card>
-      <div className="col-span-4 px-16 py-8 space-y-8">
-        <TopBar />
-        <Projects />
-      </div>
-    </div>
+    <>
+      <TopBar />
+      <Projects />
+    </>
   );
 }
 

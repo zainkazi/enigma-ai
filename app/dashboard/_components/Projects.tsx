@@ -34,7 +34,7 @@ async function Projects() {
     <section>
       <div className="space-y-2">
         <div className="w-full h-[1px] bg-zinc-600" />
-        <h1 className="text-lg py-6 font-semibold">Your Projects</h1>
+        <h1 className="text-2xl py-6 font-semibold">Your Projects</h1>
       </div>
       <div>
         <div className="grid grid-cols-3 gap-8">

@@ -11,8 +11,8 @@ function NavBar() {
         <CreateProjectDialog />
       </div>
       <div>
-        <Link href="/settings">
-          <Button variant="ghost">
+        <Link href="/user-profile">
+          <Button variant="ghost" className="w-full justify-start">
             <Settings className="mr-2 w-5" />
             Settings
           </Button>
