@@ -11,9 +11,10 @@ import { useParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { fetchProject } from "@/utils/actions";
 import { Project } from "@prisma/client";
-import { ArrowRight, Loader2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, Loader2 } from "lucide-react";
 import { SpeechSchema } from "@/validationSchemas";
 import { errorClassnames } from "../avatar/CharacterPrompt";
+import Link from "next/link";
 
 type FormErrors = {
   gender?: { _errors: string[] };
@@ -92,6 +93,12 @@ const SpeechPrompt = () => {
         )}
       </div>
       <div className="flex justify-end gap-4">
+        <Link href={`/create/${params.id}/avatar`}>
+          <Button disabled={generating}>
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back
+          </Button>
+        </Link>
         {generated ? (
           <>
             <Button disabled={generating} type="submit" className="px-8">
