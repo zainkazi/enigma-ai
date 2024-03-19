@@ -39,6 +39,18 @@ export async function fetchProject(projectId: string) {
   return project;
 }
 
+// Delete a project
+export async function deleteProject(projectId: string) {
+  const deleteProject = await prisma.project.delete({
+    where: {
+      id: projectId,
+    },
+  });
+
+  revalidatePath("dashboard");
+  return deleteProject;
+}
+
 export async function updateAvatar(
   formData: AvatarFormData,
   avatar: string,

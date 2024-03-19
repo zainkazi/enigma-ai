@@ -10,6 +10,7 @@ import {
 import Link from "next/link";
 import { Project } from "@prisma/client";
 import { Trash2 } from "lucide-react";
+import DeleteAlert from "./DeleteAlert";
 
 const getProjects = async () => {
   const user = await getUserByClerkId();
@@ -40,11 +41,11 @@ async function Projects() {
         <div className="grid grid-cols-3 gap-8">
           {projects.map((project: Project) => (
             <Link href={`/create/${project.id}/avatar`} key={project.id}>
-              <Card className="hover:bg-slate-900 h-48 transition-colors">
+              <Card className="h-48 hover:ring-2 transition-all">
                 <CardHeader>
                   <div className="flex items-center justify-between">
                     <CardTitle>{project.name}</CardTitle>
-                    <Trash2 color="red  " className="transition-colors" />
+                    <DeleteAlert id={project.id} />
                   </div>
                   <CardDescription>
                     {project.createdAt.toDateString()}
