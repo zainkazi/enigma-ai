@@ -2,11 +2,12 @@ import VideoBreadcrumb from "./VideoBreadcrumb";
 import VideoHandleTab from "./_components/VIdeoHandleTab";
 import VideoPreviewTab from "./_components/VideoPreviewTab";
 
-function VideoPage() {
+function VideoPage({ params }: { params: { id: string } }) {
+  const { id } = params;
   return (
     <>
       <div className="p-8">
-        <VideoBreadcrumb />
+        <VideoBreadcrumb id={id} />
       </div>
       <div className="w-[100%] px-16 py-8  space-y-16 h-screen">
         <div className="flex gap-20 h-full">

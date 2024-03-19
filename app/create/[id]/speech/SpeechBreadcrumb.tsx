@@ -8,7 +8,8 @@ import {
 } from "@/components/ui/breadcrumb";
 import Link from "next/link";
 
-const SpeechBreadcrumb = () => {
+const SpeechBreadcrumb = ({ id }: { id: string }) => {
+  console.log(id);
   return (
     <Breadcrumb>
       <BreadcrumbList>
@@ -20,7 +21,7 @@ const SpeechBreadcrumb = () => {
         <BreadcrumbSeparator />
         <BreadcrumbItem>
           <BreadcrumbLink asChild>
-            <Link href="/dashboard">Avatar</Link>
+            <Link href={`/create/${id}/avatar`}>Avatar</Link>
           </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />

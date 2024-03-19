@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/breadcrumb";
 import Link from "next/link";
 
-const VideoBreadcrumb = () => {
+const VideoBreadcrumb = ({ id }: { id: string }) => {
   return (
     <Breadcrumb>
       <BreadcrumbList>
@@ -20,13 +20,13 @@ const VideoBreadcrumb = () => {
         <BreadcrumbSeparator />
         <BreadcrumbItem>
           <BreadcrumbLink asChild>
-            <Link href="/dashboard">Avatar</Link>
+            <Link href={`/create/${id}/avatar`}>Avatar</Link>
           </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
           <BreadcrumbLink asChild>
-            <Link href="/dashboard">Speech</Link>
+            <Link href={`/create/${id}/speech`}>Speech</Link>
           </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
