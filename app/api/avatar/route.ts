@@ -1,3 +1,4 @@
+import { minusTokens } from "@/utils/actions";
 import openai from "@/utils/openai";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -19,6 +20,9 @@ export const POST = async (request: NextRequest) => {
   if (!imageUrl) {
     return NextResponse.json({ error: "Could not generate image" });
   }
+
+  //subtract tokens
+  await minusTokens(numberOfCharacters * 2);
 
   return NextResponse.json(image);
 };

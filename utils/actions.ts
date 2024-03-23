@@ -10,7 +10,6 @@ import { AvatarFormData } from "@/store";
 
 // Create new project
 export async function createProject(projectName: string) {
-  console.log("Creating project");
   const user = await getUserByClerkId();
 
   const newProject = await prisma.project.create({
@@ -96,4 +95,22 @@ export async function updateAvatar(
   }
 
   redirect(`/create/${oldProject?.id}/speech`);
+}
+
+export async function minusTokens(amount: number) {
+  const user = await getUserByClerkId();
+
+  const updatedProject = await prisma.user.update({
+    where: {
+      id: user.id,
+    },
+    data: {
+      tokens: {
+        decrement: amount,
+      },
+    },
+  });
+
+  revalidatePath("/dashboard");
+  return updatedProject;
 }

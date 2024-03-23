@@ -2,6 +2,7 @@ import openai from "@/utils/openai";
 import supabase from "@/utils/supabase";
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/utils/db";
+import { minusTokens } from "@/utils/actions";
 
 export const POST = async (request: NextRequest) => {
   const { gender, speed, speechInput, projectId } = await request.json();
@@ -44,6 +45,8 @@ export const POST = async (request: NextRequest) => {
       speechUrl: speechUrl.data.publicUrl,
     },
   });
+
+  await minusTokens(4);
 
   return NextResponse.json(updatedProject);
 };

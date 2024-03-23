@@ -7,7 +7,7 @@ function TopBar() {
       <div className="flex space-x-4 items-center">
         <ThemeToggle />
         <UserTokens />
-        <UserButton />
+        <UserButton afterSignOutUrl="/" />
       </div>
     </section>
   );

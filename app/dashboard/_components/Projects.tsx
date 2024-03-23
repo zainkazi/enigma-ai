@@ -9,7 +9,6 @@ import {
 } from "@/components/ui/card";
 import Link from "next/link";
 import { Project } from "@prisma/client";
-import { Trash2 } from "lucide-react";
 import DeleteAlert from "./DeleteAlert";
 
 const getProjects = async () => {
