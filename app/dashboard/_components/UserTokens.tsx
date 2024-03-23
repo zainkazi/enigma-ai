@@ -1,3 +1,4 @@
+import prisma from "@/utils/db";
 import { Card } from "@/components/ui/card";
 import {
   Tooltip,
@@ -5,9 +6,26 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { getUserByClerkId } from "@/utils/getUserByClerkId";
 import { Coins } from "lucide-react";
 
-const UserTokens = ({ tokens }: { tokens: number }) => {
+const getUserTokens = async () => {
+  const user = await getUserByClerkId();
+  const userTokens = await prisma.user.findUnique({
+    where: {
+      id: user.id,
+    },
+    select: {
+      tokens: true,
+    },
+  });
+
+  return userTokens?.tokens;
+};
+
+const UserTokens = async () => {
+  const tokens = await getUserTokens();
+
   return (
     <TooltipProvider delayDuration={100}>
       <Tooltip>

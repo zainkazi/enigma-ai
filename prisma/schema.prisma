@@ -19,19 +19,19 @@ model User {
   clerkId String @unique
 
   plan     Plan?
-  credits  Credits?
+  tokens   Int       @default(100)
   projects Project[]
 
   @@index([id])
 }
 
-model Credits {
-  id     String @id @default(uuid())
-  amount Int
+// model Credits {
+//   id     String @id @default(uuid())
+//   amount Int
 
-  userId String @unique
-  user   User   @relation(fields: [userId], references: [id])
-}
+//   userId String @unique
+//   user   User   @relation(fields: [userId], references: [id])
+// }
 
 model Plan {
   id          String   @id @default(uuid())
