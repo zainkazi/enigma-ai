@@ -41,7 +41,7 @@ async function Projects() {
         <div className="grid grid-cols-3 gap-8">
           {projects.map((project: Project) => (
             <Link href={`/create/${project.id}/avatar`} key={project.id}>
-              <Card className="h-48 hover:ring-2 ring-primary transition-all">
+              <Card className="h-48 hover:ring-2 ring-primary transition-all bg-primary-foreground">
                 <CardHeader>
                   <div className="flex items-center justify-between">
                     <CardTitle>{project.name}</CardTitle>
