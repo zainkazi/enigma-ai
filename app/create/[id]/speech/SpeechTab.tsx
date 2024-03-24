@@ -6,7 +6,12 @@ import { useSpeechStore } from "@/store";
 function SpeechTab() {
   const speechUrl = useSpeechStore((state) => state.speechUrl);
 
-  if (!speechUrl) return null;
+  if (!speechUrl)
+    return (
+      <Card className="p-10 flex justify-center items-center">
+        <h1 className="opacity-40">Click 'Generate' to create speech</h1>
+      </Card>
+    );
 
   return (
     <Card className="p-8">

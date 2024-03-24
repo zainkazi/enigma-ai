@@ -14,6 +14,7 @@ import { fetchProject, updateAvatar } from "@/utils/actions";
 import { useParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { AvatarSchema, ageGroups } from "@/validationSchemas";
+import CharacterPromptLoading from "./_components/CharacterPromptLoading";
 
 type FormErrors = {
   ethnicity?: { _errors: string[] };
@@ -36,7 +37,7 @@ const CharacterPrompt = () => {
   const [uploadingAvatar, setUploadingAvatar] = useState(false);
   const [validationErrors, setValidationErrors] = useState<FormErrors>({});
 
-  const { data } = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: ["project"],
     queryFn: async () => await fetchProject(params.id as string),
   });
@@ -71,6 +72,8 @@ const CharacterPrompt = () => {
       console.log(validationResult.error.format());
     }
   };
+
+  if (isLoading) return <CharacterPromptLoading />;
 
   return (
     <form className="space-y-6" onSubmit={handleSubmit}>

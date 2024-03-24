@@ -37,7 +37,7 @@ function CharacterTab() {
           <div
             key={avatar.url}
             onClick={() => setSelectedAvatar(avatar.url)}
-            className={`m-2 cursor-pointer rounded-lg ${
+            className={`m-2 cursor-pointer rounded-lg hover:opacity-70 transition-all ${
               selectedAvatar === avatar.url &&
               !disableSelection &&
               "ring-4 ring-primary"

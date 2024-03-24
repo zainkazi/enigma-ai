@@ -15,6 +15,7 @@ import { ArrowLeft, ArrowRight, Loader2 } from "lucide-react";
 import { SpeechSchema } from "@/validationSchemas";
 import { errorClassnames } from "../avatar/CharacterPrompt";
 import Link from "next/link";
+import SpeechPromptLoading from "./_components/SpeechPromptLoading";
 
 type FormErrors = {
   gender?: { _errors: string[] };
@@ -31,7 +32,7 @@ const SpeechPrompt = () => {
   const [generating, setGenerating] = useState(false);
   const [validationErrors, setValidationErrors] = useState<FormErrors>({});
 
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["speech"],
     queryFn: async () => fetchProject(params.id as string),
   });
@@ -68,6 +69,8 @@ const SpeechPrompt = () => {
       setValidationErrors(validationResult.error.format());
     }
   };
+
+  if (isLoading) return <SpeechPromptLoading />;
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">

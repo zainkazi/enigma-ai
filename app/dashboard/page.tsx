@@ -3,7 +3,6 @@ import Projects from "./_components/Projects";
 import TopBar from "./_components/TopBar";
 import { currentUser } from "@clerk/nextjs";
 import prisma from "@/utils/db";
-import { Card } from "@/components/ui/card";
 
 async function DashboardPage() {
   const user = await currentUser();
