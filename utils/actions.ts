@@ -14,7 +14,7 @@ export async function createProject(projectName: string) {
 
   const newProject = await prisma.project.create({
     data: {
-      name: projectName,
+      name: projectName.length == 0 ? "Project" : projectName,
       userId: user.id,
     },
   });
@@ -46,7 +46,7 @@ export async function deleteProject(projectId: string) {
     },
   });
 
-  revalidatePath("dashboard");
+  revalidatePath("/dashboard");
   return deleteProject;
 }
 
@@ -94,6 +94,8 @@ export async function updateAvatar(
     });
   }
 
+  revalidatePath("/dashboard");
+  revalidatePath(`/create/${oldProject?.id}/avatar`);
   redirect(`/create/${oldProject?.id}/speech`);
 }
 

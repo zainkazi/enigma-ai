@@ -10,6 +10,7 @@ import {
 import Link from "next/link";
 import { Project } from "@prisma/client";
 import DeleteAlert from "./DeleteAlert";
+import CreateProjectDialog from "./CreateProjectDialog";
 
 const getProjects = async () => {
   const user = await getUserByClerkId();
@@ -28,42 +29,42 @@ const getProjects = async () => {
 async function Projects() {
   const projects = await getProjects();
 
-  if (projects.length === 0) return <h1>No projects yet</h1>;
+  if (projects.length === 0)
+    return (
+      <Card className="border-2 h-[68vh] flex flex-col justify-center items-center">
+        <div className=" opacity-40 text-center">
+          <h1 className="text-2xl mb-2">No projects yet</h1>
+          <p>Click 'New Project' to create one</p>
+        </div>
+      </Card>
+    );
 
   return (
-    <section>
-      <div className="space-y-2">
-        <div className="w-full h-[1px] bg-zinc-600" />
-        <h1 className="text-2xl py-6 font-semibold">Your Projects</h1>
-      </div>
-      <div>
-        <div className="grid grid-cols-3 gap-8">
-          {projects.map((project: Project) => (
-            <Link href={`/create/${project.id}/avatar`} key={project.id}>
-              <Card className="h-48 hover:ring-2 ring-primary transition-all bg-primary-foreground">
-                <CardHeader>
-                  <div className="flex items-center justify-between">
-                    <CardTitle>{project.name}</CardTitle>
-                    <DeleteAlert id={project.id} />
-                  </div>
-                  <CardDescription>
-                    {project.createdAt.toDateString()}
-                  </CardDescription>
-                </CardHeader>
-                {project.ethnicity && (
-                  <CardContent>
-                    <p>
-                      {project.ethnicity} {project.gender} with{" "}
-                      {project.hairColor} hair
-                    </p>
-                  </CardContent>
-                )}
-              </Card>
-            </Link>
-          ))}
-        </div>
-      </div>
-    </section>
+    <div className="grid grid-cols-3 gap-8">
+      {projects.map((project: Project) => (
+        <Link href={`/create/${project.id}/avatar`} key={project.id}>
+          <Card className="h-48 hover:ring-2 ring-primary transition-all bg-primary-foreground">
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <CardTitle>{project.name}</CardTitle>
+                <DeleteAlert id={project.id} />
+              </div>
+              <CardDescription>
+                {project.createdAt.toDateString()}
+              </CardDescription>
+            </CardHeader>
+            {project.ethnicity && (
+              <CardContent>
+                <p>
+                  {project.ethnicity} {project.gender} with {project.hairColor}{" "}
+                  hair
+                </p>
+              </CardContent>
+            )}
+          </Card>
+        </Link>
+      ))}
+    </div>
   );
 }
 

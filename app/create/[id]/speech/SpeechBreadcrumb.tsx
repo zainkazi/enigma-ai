@@ -9,7 +9,6 @@ import {
 import Link from "next/link";
 
 const SpeechBreadcrumb = ({ id }: { id: string }) => {
-  console.log(id);
   return (
     <Breadcrumb>
       <BreadcrumbList>

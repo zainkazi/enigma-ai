@@ -1,7 +1,21 @@
 import { Button } from "@/components/ui/button";
 import CreateProjectDialog from "./CreateProjectDialog";
-import { Settings } from "lucide-react";
-import Link from "next/link";
+import {
+  FileQuestion,
+  Info,
+  LineChart,
+  PanelsTopLeft,
+  Settings,
+} from "lucide-react";
+import NavigationLink from "./NavigationLink";
+
+const links = [
+  // { title: "Projects", icon: <PanelsTopLeft />, path: "/projects" },
+  // { title: "Analytics", icon: <LineChart />, path: "/analytics" },
+  { title: "FAQs", icon: <FileQuestion />, path: "/faqs" },
+  { title: "About Us", icon: <Info />, path: "/about-us" },
+  { title: "Settings", icon: <Settings />, path: "/user-profile" },
+];
 
 function NavBar() {
   return (
@@ -11,12 +25,14 @@ function NavBar() {
         <CreateProjectDialog />
       </div>
       <div>
-        <Link href="/user-profile">
-          <Button variant="ghost" className="w-full justify-start">
-            <Settings className="mr-2 w-5" />
-            Settings
-          </Button>
-        </Link>
+        {links.map((link) => (
+          <NavigationLink
+            key={link.title}
+            title={link.title}
+            icon={link.icon}
+            path={link.path}
+          />
+        ))}
       </div>
     </section>
   );

@@ -57,3 +57,8 @@
     @apply bg-background text-foreground;
   }
 }
+
+.cl-internal-b3fm6y,
+.cl-userButtonPopoverFooter {
+  display: none;
+}

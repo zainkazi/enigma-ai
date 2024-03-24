@@ -66,12 +66,11 @@ const SpeechPrompt = () => {
       setSpeechUrl(speech.data.speechUrl || "");
     } else {
       setValidationErrors(validationResult.error.format());
-      console.log(validationResult.error.format());
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-10">
+    <form onSubmit={handleSubmit} className="space-y-6">
       <div className="flex gap-24">
         <div>
           <SpeechGenderSelector />

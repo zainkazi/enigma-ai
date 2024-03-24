@@ -10,7 +10,7 @@ const SpeechPage = ({ params }: { params: { id: string } }) => {
       <div className="p-8">
         <SpeechBreadcrumb id={id} />
       </div>
-      <div className="px-16 py-8 space-y-16 h-screen">
+      <div className="px-16 py-4 space-y-16 h-screen">
         <SpeechPrompt />
         <SpeechTab />
       </div>

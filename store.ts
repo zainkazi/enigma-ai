@@ -51,7 +51,7 @@ export const useAvatarStore = create<AvatarStore>()((set) => ({
 export const useSpeechStore = create<SpeechStore>()((set) => ({
   formData: {
     gender: null,
-    speed: 1,
+    speed: null,
     speechInput: "",
   },
   setFormData: (name, value) =>
