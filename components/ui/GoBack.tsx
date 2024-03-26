@@ -3,10 +3,7 @@ import Link from "next/link";
 
 const GoBack = () => {
   return (
-    <Link
-      href="/dashboard"
-      className="flex text-xl items-center hover:font-semibold transition-all"
-    >
+    <Link href="/dashboard">
       <ArrowLeft className="mr-2 w-12 h-12" />
     </Link>
   );
