@@ -7,8 +7,7 @@ const GoBack = () => {
       href="/dashboard"
       className="flex text-xl items-center hover:font-semibold transition-all"
     >
-      <ArrowLeft className="mr-2" />
-      Go back
+      <ArrowLeft className="mr-2 w-12 h-12" />
     </Link>
   );
 };
