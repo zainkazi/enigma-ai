@@ -7,7 +7,7 @@ import SpeechGenderSelector from "./_components/SpeechGenderSelector";
 import { Button } from "@/components/ui/button";
 import { useSpeechStore } from "@/store";
 import axios from "axios";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { fetchProject } from "@/utils/actions";
 import { Project } from "@prisma/client";
@@ -31,6 +31,7 @@ const SpeechPrompt = () => {
   const [generated, setGenerated] = useState(false);
   const [generating, setGenerating] = useState(false);
   const [validationErrors, setValidationErrors] = useState<FormErrors>({});
+  const router = useRouter();
 
   const { data, isLoading } = useQuery({
     queryKey: ["speech"],
@@ -70,6 +71,10 @@ const SpeechPrompt = () => {
     }
   };
 
+  const handleContinue = () => {
+    router.push(`/create/${params.id}/video`);
+  };
+
   if (isLoading) return <SpeechPromptLoading />;
 
   return (
@@ -107,7 +112,12 @@ const SpeechPrompt = () => {
               {generating ? "Generating" : "Regenerate"}
               {generating && <Loader2 className="ml-2 h-4 w-4 animate-spin" />}
             </Button>
-            <Button disabled={generating} type="button" className="px-8">
+            <Button
+              onClick={handleContinue}
+              disabled={generating}
+              type="button"
+              className="px-8"
+            >
               Continue <ArrowRight className="h-4 w-4 ml-2" />
             </Button>
           </>
