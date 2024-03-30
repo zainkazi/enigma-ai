@@ -15,6 +15,7 @@ import { useParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { AvatarSchema, ageGroups } from "@/validationSchemas";
 import CharacterPromptLoading from "./_components/CharacterPromptLoading";
+import queryClient from "@/utils/queryClient";
 
 type FormErrors = {
   ethnicity?: { _errors: string[] };
@@ -42,6 +43,7 @@ const CharacterPrompt = () => {
   const { data, isLoading, error } = useQuery({
     queryKey: ["project"],
     queryFn: async () => await fetchProject(params.id as string),
+    staleTime: 0,
   });
 
   useEffect(() => {
@@ -70,6 +72,7 @@ const CharacterPrompt = () => {
       setGenerated(true);
       setGenerating(false);
       setGeneratingAvatar(false);
+      queryClient.invalidateQueries({ queryKey: ["project"] });
       setAvatars(generatedAvatars.data.data);
     } else {
       setValidationErrors(validationResult.error.format());

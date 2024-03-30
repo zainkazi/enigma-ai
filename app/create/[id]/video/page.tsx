@@ -2,8 +2,13 @@ import axios from "axios";
 import VideoHandleTab from "./_components/VIdeoHandleTab";
 import VideoPreviewTab from "./_components/VideoPreviewTab";
 import prisma from "@/utils/db";
+import { unstable_noStore as noStore } from "next/cache";
+
+export const dynamic = "force-dynamic";
 
 async function VideoPage({ params }: { params: { id: string } }) {
+  noStore();
+
   const { id } = params;
   let videoUrl;
 

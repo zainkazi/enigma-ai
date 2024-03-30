@@ -16,6 +16,7 @@ import { SpeechSchema } from "@/validationSchemas";
 import { errorClassnames } from "../avatar/CharacterPrompt";
 import Link from "next/link";
 import SpeechPromptLoading from "./_components/SpeechPromptLoading";
+import queryClient from "@/utils/queryClient";
 
 type FormErrors = {
   gender?: { _errors: string[] };
@@ -39,6 +40,7 @@ const SpeechPrompt = () => {
   const { data, isLoading } = useQuery({
     queryKey: ["speech"],
     queryFn: async () => fetchProject(params.id as string),
+    staleTime: 0,
   });
 
   useEffect(() => {
@@ -71,6 +73,7 @@ const SpeechPrompt = () => {
       setGenerated(true);
       setGeneratingSpeech(false);
       setSpeechUrl(speech.data.speechUrl || "");
+      queryClient.invalidateQueries({ queryKey: ["speech"] });
     } else {
       setValidationErrors(validationResult.error.format());
     }
