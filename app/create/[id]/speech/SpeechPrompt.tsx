@@ -26,6 +26,9 @@ type FormErrors = {
 const SpeechPrompt = () => {
   const params = useParams();
   const formData = useSpeechStore((state) => state.formData);
+  const setGeneratingSpeech = useSpeechStore(
+    (state) => state.setGeneratingSpeech
+  );
   const setFormData = useSpeechStore((state) => state.setFormData);
   const setSpeechUrl = useSpeechStore((state) => state.setSpeechUrl);
   const [generated, setGenerated] = useState(false);
@@ -56,6 +59,7 @@ const SpeechPrompt = () => {
     const validationResult = SpeechSchema.safeParse(formData);
 
     if (validationResult.success) {
+      setGeneratingSpeech(true);
       setValidationErrors({});
       setGenerating(true);
       const speech = await axios.post<Project>("/api/speech", {
@@ -65,6 +69,7 @@ const SpeechPrompt = () => {
 
       setGenerating(false);
       setGenerated(true);
+      setGeneratingSpeech(false);
       setSpeechUrl(speech.data.speechUrl || "");
     } else {
       setValidationErrors(validationResult.error.format());

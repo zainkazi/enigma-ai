@@ -20,16 +20,20 @@ interface AvatarStore {
   formData: AvatarFormData;
   avatars: { url: string }[];
   selectedAvatar: string | null;
+  generatingAvatar: boolean;
   setSelectedAvatar: (avatarUrl: string) => void;
   setAvatars: (avatarsList: { url: string }[]) => void;
   setFormData: (name: string, value: string | number | null) => void;
+  setGeneratingAvatar: (generatingAvatar: boolean) => void;
 }
 
 interface SpeechStore {
   formData: SpeechFormData;
+  generatingSpeech: boolean;
   setFormData: (name: string, value: string | number | null) => void;
   speechUrl: string;
   setSpeechUrl: (speechUrl: string) => void;
+  setGeneratingSpeech: (generatingSpeech: boolean) => void;
 }
 
 export const useAvatarStore = create<AvatarStore>()((set) => ({
@@ -42,10 +46,12 @@ export const useAvatarStore = create<AvatarStore>()((set) => ({
   },
   avatars: [],
   selectedAvatar: null,
+  generatingAvatar: false,
   setSelectedAvatar: (avatarUrl) => set(() => ({ selectedAvatar: avatarUrl })),
   setAvatars: (avatars) => set(() => ({ avatars })),
   setFormData: (name, value) =>
     set((state) => ({ formData: { ...state.formData, [name]: value } })),
+  setGeneratingAvatar: (generatingAvatar) => set(() => ({ generatingAvatar })),
 }));
 
 export const useSpeechStore = create<SpeechStore>()((set) => ({
@@ -54,15 +60,17 @@ export const useSpeechStore = create<SpeechStore>()((set) => ({
     speed: null,
     speechInput: "",
   },
+  generatingSpeech: false,
   setFormData: (name, value) =>
     set((state) => ({ formData: { ...state.formData, [name]: value } })),
   speechUrl: "",
   setSpeechUrl: (speechUrl) => set(() => ({ speechUrl })),
+  setGeneratingSpeech: (generatingSpeech) => set(() => ({ generatingSpeech })),
 }));
 
-// useAvatarStore.subscribe((state) =>
-//   console.log("Avatar Store updated:", state.formData)
-// );
-// useSpeechStore.subscribe((state) =>
-//   console.log("Speech Store updated:", state.formData)
-// );
+useAvatarStore.subscribe((state) =>
+  console.log("Avatar Store updated:", state.generatingAvatar)
+);
+useSpeechStore.subscribe((state) =>
+  console.log("Speech Store updated:", state.generatingSpeech)
+);

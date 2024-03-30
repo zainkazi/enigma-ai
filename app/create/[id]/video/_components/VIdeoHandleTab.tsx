@@ -6,7 +6,7 @@ const VideoHandleTab = ({ videoUrl }: { videoUrl: string }) => {
   return (
     <div className=" rounded-xl text-center p-8 max-w-sm mx-auto flex flex-col justify-center">
       <div className="text-2xl text-indigo-500 font-bold mb-2">
-        This is a success create!
+        This is a success create! <span className="text-green-500">✔</span>
       </div>
       <p className="text-white mb-8">
         Congrats! You have built the most amazing video in the world!

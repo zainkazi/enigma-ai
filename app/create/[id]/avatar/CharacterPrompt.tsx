@@ -28,7 +28,9 @@ export const errorClassnames = "text-red-500 text-sm mt-2";
 const CharacterPrompt = () => {
   const params = useParams();
   const formData = useAvatarStore((state) => state.formData);
-  const avatars = useAvatarStore((state) => state.avatars);
+  const setGeneratingAvatar = useAvatarStore(
+    (state) => state.setGeneratingAvatar
+  );
   const setAvatars = useAvatarStore((state) => state.setAvatars);
   const setFormData = useAvatarStore((state) => state.setFormData);
   const selectedAvatar = useAvatarStore((state) => state.selectedAvatar);
@@ -61,11 +63,13 @@ const CharacterPrompt = () => {
     const validationResult = AvatarSchema.safeParse(formData);
 
     if (validationResult.success) {
+      setGeneratingAvatar(true);
       setValidationErrors({});
       setGenerating(true);
       const generatedAvatars = await axios.post("/api/avatar", formData);
       setGenerated(true);
       setGenerating(false);
+      setGeneratingAvatar(false);
       setAvatars(generatedAvatars.data.data);
     } else {
       setValidationErrors(validationResult.error.format());

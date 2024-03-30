@@ -4,12 +4,14 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useAvatarStore } from "@/store";
 import { Card } from "@/components/ui/card";
+import AvatarAnimation from "./_components/AvatarAnimation";
 
 function CharacterTab() {
   const selectedAvatar = useAvatarStore((state) => state.selectedAvatar);
   const setSelectedAvatar = useAvatarStore((state) => state.setSelectedAvatar);
   const avatars = useAvatarStore((state) => state.avatars);
   const [disableSelection, setDisableSelection] = useState(false);
+  const generatingAvatar = useAvatarStore((state) => state.generatingAvatar);
 
   useEffect(() => {
     if (avatars.length === 1) {
@@ -17,6 +19,13 @@ function CharacterTab() {
       setDisableSelection(true);
     }
   }, [avatars]);
+
+  if (generatingAvatar)
+    return (
+      <Card className="min-h-screen flex items-center justify-center">
+        <AvatarAnimation />
+      </Card>
+    );
 
   if (avatars.length === 0)
     return (

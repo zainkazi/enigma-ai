@@ -2,9 +2,18 @@
 
 import { Card } from "@/components/ui/card";
 import { useSpeechStore } from "@/store";
+import SpeechAnimation from "./_components/SpeechAnimation";
 
 function SpeechTab() {
   const speechUrl = useSpeechStore((state) => state.speechUrl);
+  const generatingSpeech = useSpeechStore((state) => state.generatingSpeech);
+
+  if (generatingSpeech)
+    return (
+      <Card className="p-10 flex justify-center items-center">
+        <SpeechAnimation />
+      </Card>
+    );
 
   if (!speechUrl)
     return (
