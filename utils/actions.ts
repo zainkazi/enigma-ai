@@ -90,12 +90,14 @@ export async function updateAvatar(
         gender,
         hairColor,
         avatarUrl: storedImage.publicUrl,
+        updateVideo: true,
       },
     });
   }
 
   revalidatePath("/dashboard");
   revalidatePath(`/create/${oldProject?.id}/avatar`);
+  revalidatePath(`/create/${oldProject?.id}/video`);
   redirect(`/create/${oldProject?.id}/speech`);
 }
 

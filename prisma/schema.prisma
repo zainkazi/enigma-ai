@@ -9,7 +9,7 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
-  
+
 model User {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
@@ -66,6 +66,7 @@ model Project {
   speechGender String? @db.Text
   speechUrl    String? @db.Text
   videoUrl     String? @db.Text
+  updateVideo  Boolean @default(true)
 
   userId String
   user   User   @relation(fields: [userId], references: [id])

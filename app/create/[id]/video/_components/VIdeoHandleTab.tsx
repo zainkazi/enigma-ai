@@ -1,7 +1,8 @@
 import { Button } from "@/components/ui/button";
-import { CheckCircle, Download } from "lucide-react";
+import { Download } from "lucide-react";
+import Link from "next/link";
 
-const VideoHandleTab = () => {
+const VideoHandleTab = ({ videoUrl }: { videoUrl: string }) => {
   return (
     <div className=" rounded-xl text-center p-8 max-w-sm mx-auto flex flex-col justify-center">
       <div className="text-2xl text-indigo-500 font-bold mb-2">
@@ -15,9 +16,11 @@ const VideoHandleTab = () => {
           Download
           <Download className="ml-2 w-5" />
         </Button>
-        <Button type="button" variant="secondary">
-          Back to Home
-        </Button>
+        <Link href="/dashboard">
+          <Button type="button" className="w-full" variant="secondary">
+            Back to Home
+          </Button>
+        </Link>
       </div>
     </div>
   );

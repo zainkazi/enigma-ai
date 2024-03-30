@@ -43,6 +43,7 @@ export const POST = async (request: NextRequest) => {
       speechSpeed: speed.toString(),
       speechPrompt: speechInput,
       speechUrl: speechUrl.data.publicUrl,
+      updateVideo: true,
     },
   });
 
