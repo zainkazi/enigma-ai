@@ -42,10 +42,10 @@ async function VideoPage({ params }: { params: { id: string } }) {
 
     videoUrl = updatedProject.data.data[0].videoUrl;
 
-    console.log("New Video", videoUrl);
+    // console.log("New Video", videoUrl);
   } else {
     videoUrl = project?.videoUrl;
-    console.log("Old Video", videoUrl);
+    // console.log("Old Video", videoUrl);
   }
 
   return (

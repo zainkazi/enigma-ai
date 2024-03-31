@@ -11,9 +11,9 @@ const VideoPageLoading = () => {
 
       <div className=" rounded-xl text-center p-8 max-w-sm mx-auto flex flex-col justify-center">
         <div className="text-2xl font-bold mb-2">
-          Your video is being generated. 😎
+          Your video is being generated.
         </div>
-        <p className=" mb-8">Be patient.</p>
+        <p className=" my-8 text-xl">Be patient 🙂</p>
       </div>
     </div>
   );

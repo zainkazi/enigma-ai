@@ -12,10 +12,12 @@ const VideoHandleTab = ({ videoUrl }: { videoUrl: string }) => {
         Congrats! You have built the most amazing video in the world!
       </p>
       <div className=" flex flex-col space-y-2">
-        <Button type="button">
-          Download
-          <Download className="ml-2 w-5" />
-        </Button>
+        <Link legacyBehavior href={videoUrl}>
+          <Button type="button" className="w-full">
+            Download
+            <Download className="ml-2 w-5" />
+          </Button>
+        </Link>
         <Link href="/dashboard">
           <Button type="button" className="w-full" variant="secondary">
             Back to Home
