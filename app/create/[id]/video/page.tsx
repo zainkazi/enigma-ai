@@ -19,11 +19,17 @@ async function VideoPage({ params }: { params: { id: string } }) {
   });
 
   if (project?.updateVideo) {
-    const updatedProject = await axios.post(process.env.VIDEO_SERVER_URL!, {
-      projectId: project?.id,
-      image: project?.avatarUrl,
-      audio: project?.speechUrl,
-    });
+    const updatedProject = await axios.post(
+      process.env.VIDEO_SERVER_URL!,
+      {
+        projectId: project?.id,
+        image: project?.avatarUrl,
+        audio: project?.speechUrl,
+      },
+      {
+        timeout: 600000,
+      }
+    );
 
     const changeUpdateVideo = await prisma.project.update({
       where: {

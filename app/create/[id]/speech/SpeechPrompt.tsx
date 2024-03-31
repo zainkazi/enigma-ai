@@ -16,7 +16,7 @@ import { SpeechSchema } from "@/validationSchemas";
 import { errorClassnames } from "../avatar/CharacterPrompt";
 import Link from "next/link";
 import SpeechPromptLoading from "./_components/SpeechPromptLoading";
-import queryClient from "@/utils/queryClient";
+import { useQueryClient } from "@tanstack/react-query";
 
 type FormErrors = {
   gender?: { _errors: string[] };
@@ -25,6 +25,7 @@ type FormErrors = {
 };
 
 const SpeechPrompt = () => {
+  const queryClient = useQueryClient();
   const params = useParams();
   const formData = useSpeechStore((state) => state.formData);
   const setGeneratingSpeech = useSpeechStore(

@@ -15,7 +15,7 @@ import { useParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { AvatarSchema, ageGroups } from "@/validationSchemas";
 import CharacterPromptLoading from "./_components/CharacterPromptLoading";
-import queryClient from "@/utils/queryClient";
+import { useQueryClient } from "@tanstack/react-query";
 
 type FormErrors = {
   ethnicity?: { _errors: string[] };
@@ -27,6 +27,7 @@ type FormErrors = {
 export const errorClassnames = "text-red-500 text-sm mt-2";
 
 const CharacterPrompt = () => {
+  const queryClient = useQueryClient();
   const params = useParams();
   const formData = useAvatarStore((state) => state.formData);
   const setGeneratingAvatar = useAvatarStore(
