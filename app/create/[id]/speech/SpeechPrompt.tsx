@@ -41,7 +41,6 @@ const SpeechPrompt = () => {
   const { data, isLoading } = useQuery({
     queryKey: ["speech"],
     queryFn: async () => fetchProject(params.id as string),
-    staleTime: 0,
   });
 
   useEffect(() => {

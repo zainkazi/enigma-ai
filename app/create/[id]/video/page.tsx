@@ -49,7 +49,7 @@ async function VideoPage({ params }: { params: { id: string } }) {
   }
 
   return (
-    <div className="w-[100%] px-16 py-8 mb-20 space-y-16 flex gap-20 h-screen">
+    <div className="w-[100%] px-16 py-8 mb-20 space-y-16 flex gap-20 h-[screen]">
       <VideoPreviewTab videoUrl={videoUrl} />
       <VideoHandleTab videoUrl={videoUrl} />
     </div>

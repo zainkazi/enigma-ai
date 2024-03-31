@@ -44,7 +44,6 @@ const CharacterPrompt = () => {
   const { data, isLoading, error } = useQuery({
     queryKey: ["project"],
     queryFn: async () => await fetchProject(params.id as string),
-    staleTime: 0,
   });
 
   useEffect(() => {
