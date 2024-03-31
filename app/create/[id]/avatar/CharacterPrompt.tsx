@@ -128,6 +128,7 @@ const CharacterPrompt = () => {
                 params.id as string
               );
               setUploadingAvatar(false);
+              setAvatars([]);
             }}
           >
             Next{" "}
