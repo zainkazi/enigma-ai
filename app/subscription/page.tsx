@@ -20,7 +20,7 @@ const SubscriptionPage = async () => {
   return (
     <div className="px-20 pt-8">
       <GoBack />
-      <h1 className="my-6 text-4xl text-center">Your Subscription</h1>
+      <h1 className="my-6 text-4xl text-center font-bold">Your Subscription</h1>
       <div className="md:grid grid-cols-3 gap-8">
         <Card>
           <CardHeader className="space-y-6">

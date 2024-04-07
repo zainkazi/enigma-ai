@@ -31,7 +31,7 @@ const SubscriptionLoading = () => {
             <Skeleton className="h-4 w-full" />
           </CardContent>
           <CardFooter>
-            <Skeleton className="h-8 w-full" />
+            <Skeleton className="h-10 w-full" />
           </CardFooter>
         </Card>
         <Card>
@@ -50,7 +50,7 @@ const SubscriptionLoading = () => {
             <Skeleton className="h-4 w-full" />
           </CardContent>
           <CardFooter>
-            <Skeleton className="h-8 w-full" />
+            <Skeleton className="h-10 w-full" />
           </CardFooter>
         </Card>
         <Card>
@@ -69,7 +69,7 @@ const SubscriptionLoading = () => {
             <Skeleton className="h-4 w-full" />
           </CardContent>
           <CardFooter>
-            <Skeleton className="h-8 w-full" />
+            <Skeleton className="h-10 w-full" />
           </CardFooter>
         </Card>
       </div>
