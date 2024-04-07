@@ -18,6 +18,10 @@ function CharacterTab() {
       setSelectedAvatar(avatars[0].url);
       setDisableSelection(true);
     }
+
+    return () => {
+      setSelectedAvatar(null);
+    };
   }, [avatars]);
 
   if (generatingAvatar)

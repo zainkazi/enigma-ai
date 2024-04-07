@@ -21,7 +21,7 @@ interface AvatarStore {
   avatars: { url: string }[];
   selectedAvatar: string | null;
   generatingAvatar: boolean;
-  setSelectedAvatar: (avatarUrl: string) => void;
+  setSelectedAvatar: (avatarUrl: string | null) => void;
   setAvatars: (avatarsList: { url: string }[]) => void;
   setFormData: (name: string, value: string | number | null) => void;
   setGeneratingAvatar: (generatingAvatar: boolean) => void;
@@ -68,9 +68,9 @@ export const useSpeechStore = create<SpeechStore>()((set) => ({
   setGeneratingSpeech: (generatingSpeech) => set(() => ({ generatingSpeech })),
 }));
 
-useAvatarStore.subscribe((state) =>
-  console.log("Avatar Store updated:", state.generatingAvatar)
-);
-useSpeechStore.subscribe((state) =>
-  console.log("Speech Store updated:", state.generatingSpeech)
-);
+// useAvatarStore.subscribe((state) =>
+//   console.log("Avatar Store updated:", state)
+// );
+// useSpeechStore.subscribe((state) =>
+//   console.log("Speech Store updated:", state.generatingSpeech)
+// );

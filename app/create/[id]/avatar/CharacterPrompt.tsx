@@ -57,6 +57,10 @@ const CharacterPrompt = () => {
       setAvatars([{ url: data.avatarUrl }]);
       setGenerated(true);
     }
+
+    return () => {
+      setAvatars([]);
+    };
   }, [data, setFormData, setAvatars]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
