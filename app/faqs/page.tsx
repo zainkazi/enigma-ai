@@ -11,7 +11,10 @@ const FAQs = () => {
     <div className="px-20 pt-8">
       <GoBack />
       <div className="p-8 px-32">
-        <h1 className="text-5xl font-bold py-4">FAQs</h1>
+        <div className="font-bold py-4 flex items-center justify-between">
+          <h1 className="text-5xl">Faqs</h1>
+          <h1 className="text-6xl">?</h1>
+        </div>
         <Accordion type="single" collapsible className="w-full">
           <AccordionItem value="item-1">
             <AccordionTrigger>What is Enigma AI?</AccordionTrigger>
