@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import CreateProjectDialog from "./CreateProjectDialog";
 import {
+  CircleDollarSign,
   FileQuestion,
   Info,
   LineChart,
@@ -14,6 +15,7 @@ const links = [
   // { title: "Analytics", icon: <LineChart />, path: "/analytics" },
   { title: "FAQs", icon: <FileQuestion />, path: "/faqs" },
   { title: "About Us", icon: <Info />, path: "/about-us" },
+  { title: "Subscription", icon: <CircleDollarSign />, path: "/subscription" },
   { title: "Settings", icon: <Settings />, path: "/user-profile" },
 ];
 

@@ -3,6 +3,9 @@ import VideoHandleTab from "./_components/VIdeoHandleTab";
 import VideoPreviewTab from "./_components/VideoPreviewTab";
 import prisma from "@/utils/db";
 import { unstable_noStore as noStore } from "next/cache";
+import { minusTokens } from "@/utils/actions";
+import { getUserByClerkId } from "@/utils/getUserByClerkId";
+import { redirect } from "next/navigation";
 
 export const dynamic = "force-dynamic";
 
@@ -12,6 +15,8 @@ async function VideoPage({ params }: { params: { id: string } }) {
   const { id } = params;
   let videoUrl;
 
+  const user = await getUserByClerkId();
+
   const project = await prisma.project.findUnique({
     where: {
       id: id,
@@ -19,6 +24,8 @@ async function VideoPage({ params }: { params: { id: string } }) {
   });
 
   if (project?.updateVideo) {
+    if (user.tokens - 10 < 0) redirect("/subscription");
+
     const updatedProject = await axios.post(
       process.env.VIDEO_SERVER_URL!,
       {
@@ -40,6 +47,7 @@ async function VideoPage({ params }: { params: { id: string } }) {
       },
     });
 
+    await minusTokens(10);
     videoUrl = updatedProject.data.data[0].videoUrl;
 
     // console.log("New Video", videoUrl);

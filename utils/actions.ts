@@ -118,3 +118,25 @@ export async function minusTokens(amount: number) {
   revalidatePath("/dashboard");
   return updatedProject;
 }
+
+export async function changePlan(planName: "FREE" | "PREMIUM") {
+  const user = await getUserByClerkId();
+
+  if (planName == "FREE") {
+    await prisma.user.update({
+      where: { id: user.id },
+      data: {
+        plan: "FREE",
+      },
+    });
+  }
+
+  if (planName == "PREMIUM") {
+    await prisma.user.update({
+      where: { id: user.id },
+      data: { plan: "PREMIUM" },
+    });
+  }
+
+  revalidatePath("/subscription");
+}

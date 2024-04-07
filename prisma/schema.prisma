@@ -18,28 +18,11 @@ model User {
   email   String @unique
   clerkId String @unique
 
-  plan     Plan?
+  plan     PlanName  @default(FREE)
   tokens   Int       @default(100)
   projects Project[]
 
   @@index([id])
-}
-
-// model Credits {
-//   id     String @id @default(uuid())
-//   amount Int
-
-//   userId String @unique
-//   user   User   @relation(fields: [userId], references: [id])
-// }
-
-model Plan {
-  id          String   @id @default(uuid())
-  name        PlanName @default(FREE)
-  renewalDate DateTime @default(now())
-
-  userId String @unique
-  user   User   @relation(fields: [userId], references: [id])
 }
 
 enum PlanName {
@@ -71,3 +54,20 @@ model Project {
   userId String
   user   User   @relation(fields: [userId], references: [id])
 }
+
+// model Credits {
+//   id     String @id @default(uuid())
+//   amount Int
+
+//   userId String @unique
+//   user   User   @relation(fields: [userId], references: [id])
+// }
+
+// model Plan {
+//   id          String   @id @default(uuid())
+//   name        PlanName @default(FREE)
+//   renewalDate DateTime @default(now())
+
+//   userId String @unique
+//   user   User   @relation(fields: [userId], references: [id])
+// }

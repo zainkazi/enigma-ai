@@ -3,10 +3,15 @@ import supabase from "@/utils/supabase";
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/utils/db";
 import { minusTokens } from "@/utils/actions";
+import { getUserByClerkId } from "@/utils/getUserByClerkId";
+import { redirect } from "next/navigation";
 
 export const POST = async (request: NextRequest) => {
   const { gender, speed, speechInput, projectId } = await request.json();
-  console.log("Generating Speech");
+
+  const user = await getUserByClerkId();
+  if (user.tokens - 6 < 0) redirect("/subscription");
+
   const mp3 = await openai.audio.speech.create({
     model: "tts-1",
     voice: gender === "Male" ? "alloy" : "nova",
@@ -18,7 +23,6 @@ export const POST = async (request: NextRequest) => {
   const speech = Buffer.from(await mp3.arrayBuffer());
 
   const speechFileName = `public/${Date.now()}.wav`;
-  console.log(speechFileName);
 
   const { data, error } = await supabase.storage
     .from("speeches")
@@ -47,7 +51,7 @@ export const POST = async (request: NextRequest) => {
     },
   });
 
-  await minusTokens(4);
+  await minusTokens(6);
 
   return NextResponse.json(updatedProject);
 };
