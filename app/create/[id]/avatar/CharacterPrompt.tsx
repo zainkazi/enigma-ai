@@ -16,6 +16,7 @@ import { useQuery } from "@tanstack/react-query";
 import { AvatarSchema, ageGroups } from "@/validationSchemas";
 import CharacterPromptLoading from "./_components/CharacterPromptLoading";
 import { useQueryClient } from "@tanstack/react-query";
+import { Project } from "@prisma/client";
 
 type FormErrors = {
   ethnicity?: { _errors: string[] };
@@ -40,28 +41,39 @@ const CharacterPrompt = () => {
   const [generated, setGenerated] = useState(false);
   const [uploadingAvatar, setUploadingAvatar] = useState(false);
   const [validationErrors, setValidationErrors] = useState<FormErrors>({});
+  const [projectData, setProjectData] = useState<Project>();
+  const [isDataLoading, setIsDataLoading] = useState(false);
 
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["project"],
-    queryFn: async () => await fetchProject(params.id as string),
-  });
+  // const { data, isLoading, error } = useQuery({
+  //   queryKey: ["project"],
+  //   queryFn: async () => await fetchProject(params.id as string),
+  // });
 
   useEffect(() => {
-    if (data) {
-      setFormData("ethnicity", data.ethnicity);
-      setFormData("ageGroup", data.ageGroup);
-      setFormData("hairColor", data.hairColor);
-      setFormData("gender", data.gender);
-    }
-    if (data?.avatarUrl) {
-      setAvatars([{ url: data.avatarUrl }]);
-      setGenerated(true);
-    }
+    const getProject = async () => {
+      setIsDataLoading(true);
+      const data = await fetchProject(params.id as string);
+      setIsDataLoading(false);
+      setProjectData(data);
+
+      if (data) {
+        setFormData("ethnicity", data.ethnicity);
+        setFormData("ageGroup", data.ageGroup);
+        setFormData("hairColor", data.hairColor);
+        setFormData("gender", data.gender);
+      }
+      if (data?.avatarUrl) {
+        setAvatars([{ url: data.avatarUrl }]);
+        setGenerated(true);
+      }
+    };
+
+    getProject();
 
     return () => {
       setAvatars([]);
     };
-  }, [data, setFormData, setAvatars]);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -84,7 +96,7 @@ const CharacterPrompt = () => {
     }
   };
 
-  if (isLoading) return <CharacterPromptLoading />;
+  if (isDataLoading) return <CharacterPromptLoading />;
 
   return (
     <form className="space-y-6" onSubmit={handleSubmit}>
@@ -115,7 +127,7 @@ const CharacterPrompt = () => {
       <div>
         <CharacterQuantitySelector />
       </div>
-      {generated || data?.avatarUrl ? (
+      {generated || projectData?.avatarUrl ? (
         <div className="space-x-6">
           <Button disabled={generating || uploadingAvatar} type="submit">
             {generating ? "Generating" : "Regenerate"}
