@@ -37,23 +37,36 @@ const SpeechPrompt = () => {
   const [generating, setGenerating] = useState(false);
   const [validationErrors, setValidationErrors] = useState<FormErrors>({});
   const router = useRouter();
+  const [isDataLoading, setIsDataLoading] = useState(false);
 
-  const { data, isLoading } = useQuery({
-    queryKey: ["speech"],
-    queryFn: async () => fetchProject(params.id as string),
-  });
+  // const { data, isLoading } = useQuery({
+  //   queryKey: ["speech"],
+  //   queryFn: async () => fetchProject(params.id as string),
+  // });
 
   useEffect(() => {
-    if (data) {
-      setFormData("speed", Number(data.speechSpeed));
-      setFormData("gender", data.speechGender);
-      setFormData("speechInput", data.speechPrompt);
-    }
-    if (data?.speechUrl) {
-      setSpeechUrl(data.speechUrl);
-      setGenerated(true);
-    }
-  }, [data, setFormData, setSpeechUrl]);
+    const getProject = async () => {
+      setIsDataLoading(true);
+      const data = await fetchProject(params.id as string);
+      setIsDataLoading(false);
+
+      if (data) {
+        setFormData("speed", Number(data.speechSpeed));
+        setFormData("gender", data.speechGender);
+        setFormData("speechInput", data.speechPrompt);
+      }
+      if (data?.speechUrl) {
+        setSpeechUrl(data.speechUrl);
+        setGenerated(true);
+      }
+    };
+
+    getProject();
+
+    return () => {
+      setSpeechUrl("");
+    };
+  }, [params.id, setFormData, setSpeechUrl]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -83,7 +96,7 @@ const SpeechPrompt = () => {
     router.push(`/create/${params.id}/video`);
   };
 
-  if (isLoading) return <SpeechPromptLoading />;
+  if (isDataLoading) return <SpeechPromptLoading />;
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
