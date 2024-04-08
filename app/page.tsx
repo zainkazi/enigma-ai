@@ -6,7 +6,7 @@ import VideoAnimation from "./create/[id]/video/_components/VideoAnimation";
 export default async function Home() {
   return (
     <div>
-      Landing Page
+      Landing Page Hi there
       <UserButton afterSignOutUrl="/" />
     </div>
   );
