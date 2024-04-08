@@ -22,7 +22,7 @@ function CharacterTab() {
     return () => {
       setSelectedAvatar(null);
     };
-  }, [avatars]);
+  }, [avatars, setSelectedAvatar]);
 
   if (generatingAvatar)
     return (
@@ -35,7 +35,8 @@ function CharacterTab() {
     return (
       <Card className="min-h-screen flex items-center justify-center">
         <h1 className="text-2xl opacity-40">
-          Click 'Generate' to create your character
+          Click <span className="font-bold">Generate</span> to create your
+          character
         </h1>
       </Card>
     );

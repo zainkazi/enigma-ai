@@ -53,7 +53,7 @@ const SpeechPrompt = () => {
       setSpeechUrl(data.speechUrl);
       setGenerated(true);
     }
-  }, [data]);
+  }, [data, setFormData, setSpeechUrl]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

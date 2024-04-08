@@ -34,7 +34,9 @@ async function Projects() {
       <Card className="border-2 h-[68vh] flex flex-col justify-center items-center">
         <div className=" opacity-40 text-center">
           <h1 className="text-2xl mb-2">No projects yet</h1>
-          <p>Click 'New Project' to create one</p>
+          <p>
+            Click <span className="font-bold">New Project</span> to create one
+          </p>
         </div>
       </Card>
     );

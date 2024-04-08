@@ -18,7 +18,9 @@ function SpeechTab() {
   if (!speechUrl)
     return (
       <Card className="p-10 flex justify-center items-center">
-        <h1 className="opacity-40">Click 'Generate' to create speech</h1>
+        <h1 className="opacity-40">
+          Click <span className="font-bold">Generate</span> to create speech
+        </h1>
       </Card>
     );
 

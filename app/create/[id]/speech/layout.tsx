@@ -1,11 +1,11 @@
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, ReactNode } from "react";
 import SpeechBreadcrumb from "./SpeechBreadcrumb";
 
 const SpeechLayout = ({
   children,
   params,
 }: {
-  children: PropsWithChildren;
+  children: ReactNode;
   params: { id: string };
 }) => {
   const { id } = params;

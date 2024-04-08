@@ -35,12 +35,12 @@ const FAQs = () => {
             </AccordionTrigger>
             <AccordionContent>
               Image Generation Module: Utilizes deep learning models, including
-              openai's APIs, to create customizable human-like images based on
+              OpenAI APIs, to create customizable human-like images based on
               user specifications such as gender, ethnicity, and hair color.
               Speech Synthesis Module: Converts user-provided text into
-              natural-sounding speech using advanced NLP and openai's
+              natural-sounding speech using advanced NLP and OpenAI
               text-to-speech technologies. Lip-Sync Technology: Ensures perfect
-              synchronization of the character's lip movements with the
+              synchronization of the character lip movements with the
               synthesized speech, employing machine learning models specifically
               trained for lip-sync accuracy.
             </AccordionContent>
@@ -63,8 +63,8 @@ const FAQs = () => {
             </AccordionTrigger>
             <AccordionContent>
               Users can customize various attributes of the digital characters,
-              including gender, ethnicity, hair color, and more, using Enigma
-              AI's intuitive interface.
+              including gender, ethnicity, hair color, and more, using Enigma AI
+              intuitive interface.
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-5">
@@ -96,9 +96,9 @@ const FAQs = () => {
               What is the token usage in Enigma AI?
             </AccordionTrigger>
             <AccordionContent>
-              In Enigma AI, users' tokens are utilized for character generation,
+              In Enigma AI, users tokens are utilized for character generation,
               voice generation, and video generation. The tokens provide access
-              to the system's functionalities, allowing users to create digital
+              to the system functionalities, allowing users to create digital
               characters, generate speech from text inputs, and produce the
               final synchronized video content.
             </AccordionContent>
