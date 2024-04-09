@@ -74,7 +74,7 @@ const CharacterPrompt = () => {
     return () => {
       setAvatars([]);
     };
-  }, [setAvatars, setFormData, params.id]);
+  }, [setAvatars, setFormData, params.id, setLoadingProject]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
