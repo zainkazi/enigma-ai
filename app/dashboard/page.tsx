@@ -2,8 +2,22 @@ import Projects from "./_components/Projects";
 import TopBar from "./_components/TopBar";
 import { currentUser } from "@clerk/nextjs";
 import prisma from "@/utils/db";
+import { cache } from "react";
 
 async function DashboardPage() {
+  await saveUser();
+
+  return (
+    <>
+      <TopBar />
+      <Projects />
+    </>
+  );
+}
+
+export default DashboardPage;
+
+const saveUser = cache(async () => {
   const user = await currentUser();
   const match = await prisma.user.findUnique({
     where: {
@@ -19,13 +33,4 @@ async function DashboardPage() {
       },
     });
   }
-
-  return (
-    <>
-      <TopBar />
-      <Projects />
-    </>
-  );
-}
-
-export default DashboardPage;
+});
