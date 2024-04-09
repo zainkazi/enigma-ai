@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useAvatarStore } from "@/store";
 import { Card } from "@/components/ui/card";
 import AvatarAnimation from "./_components/AvatarAnimation";
+import AvatarLoading from "./_components/AvatarLoading";
 
 function CharacterTab() {
   const selectedAvatar = useAvatarStore((state) => state.selectedAvatar);
@@ -12,6 +13,7 @@ function CharacterTab() {
   const avatars = useAvatarStore((state) => state.avatars);
   const [disableSelection, setDisableSelection] = useState(false);
   const generatingAvatar = useAvatarStore((state) => state.generatingAvatar);
+  const loadingProject = useAvatarStore((state) => state.loadingProject);
 
   useEffect(() => {
     if (avatars.length === 1) {
@@ -23,6 +25,8 @@ function CharacterTab() {
       setSelectedAvatar(null);
     };
   }, [avatars, setSelectedAvatar]);
+
+  if (loadingProject) return <AvatarLoading />;
 
   if (generatingAvatar)
     return (

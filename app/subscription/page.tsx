@@ -105,7 +105,7 @@ const SubscriptionPage = async () => {
           </CardContent>
           <CardFooter>
             <Button className="w-full" disabled>
-              Choose
+              Coming soon...
             </Button>
           </CardFooter>
         </Card>

@@ -21,19 +21,23 @@ interface AvatarStore {
   avatars: { url: string }[];
   selectedAvatar: string | null;
   generatingAvatar: boolean;
+  loadingProject: boolean;
   setSelectedAvatar: (avatarUrl: string | null) => void;
   setAvatars: (avatarsList: { url: string }[]) => void;
   setFormData: (name: string, value: string | number | null) => void;
   setGeneratingAvatar: (generatingAvatar: boolean) => void;
+  setLoadingProject: (loadingProject: boolean) => void;
 }
 
 interface SpeechStore {
   formData: SpeechFormData;
   generatingSpeech: boolean;
+  loadingProject: boolean;
   setFormData: (name: string, value: string | number | null) => void;
   speechUrl: string;
   setSpeechUrl: (speechUrl: string) => void;
   setGeneratingSpeech: (generatingSpeech: boolean) => void;
+  setLoadingProject: (loadingProject: boolean) => void;
 }
 
 export const useAvatarStore = create<AvatarStore>()((set) => ({
@@ -47,11 +51,13 @@ export const useAvatarStore = create<AvatarStore>()((set) => ({
   avatars: [],
   selectedAvatar: null,
   generatingAvatar: false,
+  loadingProject: false,
   setSelectedAvatar: (avatarUrl) => set(() => ({ selectedAvatar: avatarUrl })),
   setAvatars: (avatars) => set(() => ({ avatars })),
   setFormData: (name, value) =>
     set((state) => ({ formData: { ...state.formData, [name]: value } })),
   setGeneratingAvatar: (generatingAvatar) => set(() => ({ generatingAvatar })),
+  setLoadingProject: (loadingProject) => set(() => ({ loadingProject })),
 }));
 
 export const useSpeechStore = create<SpeechStore>()((set) => ({
@@ -61,11 +67,13 @@ export const useSpeechStore = create<SpeechStore>()((set) => ({
     speechInput: "",
   },
   generatingSpeech: false,
+  loadingProject: false,
   setFormData: (name, value) =>
     set((state) => ({ formData: { ...state.formData, [name]: value } })),
   speechUrl: "",
   setSpeechUrl: (speechUrl) => set(() => ({ speechUrl })),
   setGeneratingSpeech: (generatingSpeech) => set(() => ({ generatingSpeech })),
+  setLoadingProject: (loadingProject) => set(() => ({ loadingProject })),
 }));
 
 // useAvatarStore.subscribe((state) =>

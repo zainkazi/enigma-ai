@@ -37,12 +37,13 @@ const CharacterPrompt = () => {
   const setAvatars = useAvatarStore((state) => state.setAvatars);
   const setFormData = useAvatarStore((state) => state.setFormData);
   const selectedAvatar = useAvatarStore((state) => state.selectedAvatar);
+  const loadingProject = useAvatarStore((state) => state.loadingProject);
+  const setLoadingProject = useAvatarStore((state) => state.setLoadingProject);
   const [generating, setGenerating] = useState(false);
   const [generated, setGenerated] = useState(false);
   const [uploadingAvatar, setUploadingAvatar] = useState(false);
   const [validationErrors, setValidationErrors] = useState<FormErrors>({});
   const [projectData, setProjectData] = useState<Project>();
-  const [isDataLoading, setIsDataLoading] = useState(false);
 
   // const { data, isLoading, error } = useQuery({
   //   queryKey: ["project"],
@@ -51,9 +52,9 @@ const CharacterPrompt = () => {
 
   useEffect(() => {
     const getProject = async () => {
-      setIsDataLoading(true);
+      setLoadingProject(true);
       const data = await fetchProject(params.id as string);
-      setIsDataLoading(false);
+      setLoadingProject(false);
       setProjectData(data);
 
       if (data) {
@@ -96,7 +97,7 @@ const CharacterPrompt = () => {
     }
   };
 
-  if (isDataLoading) return <CharacterPromptLoading />;
+  if (loadingProject) return <CharacterPromptLoading />;
 
   return (
     <form className="space-y-6" onSubmit={handleSubmit}>

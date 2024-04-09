@@ -33,11 +33,12 @@ const SpeechPrompt = () => {
   );
   const setFormData = useSpeechStore((state) => state.setFormData);
   const setSpeechUrl = useSpeechStore((state) => state.setSpeechUrl);
+  const loadingProject = useSpeechStore((state) => state.loadingProject);
+  const setLoadingProject = useSpeechStore((state) => state.setLoadingProject);
   const [generated, setGenerated] = useState(false);
   const [generating, setGenerating] = useState(false);
   const [validationErrors, setValidationErrors] = useState<FormErrors>({});
   const router = useRouter();
-  const [isDataLoading, setIsDataLoading] = useState(false);
 
   // const { data, isLoading } = useQuery({
   //   queryKey: ["speech"],
@@ -46,9 +47,9 @@ const SpeechPrompt = () => {
 
   useEffect(() => {
     const getProject = async () => {
-      setIsDataLoading(true);
+      setLoadingProject(true);
       const data = await fetchProject(params.id as string);
-      setIsDataLoading(false);
+      setLoadingProject(false);
 
       if (data) {
         setFormData("speed", Number(data.speechSpeed));
@@ -96,7 +97,7 @@ const SpeechPrompt = () => {
     router.push(`/create/${params.id}/video`);
   };
 
-  if (isDataLoading) return <SpeechPromptLoading />;
+  if (loadingProject) return <SpeechPromptLoading />;
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
