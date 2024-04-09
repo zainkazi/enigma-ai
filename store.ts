@@ -76,9 +76,9 @@ export const useSpeechStore = create<SpeechStore>()((set) => ({
   setLoadingProject: (loadingProject) => set(() => ({ loadingProject })),
 }));
 
-// useAvatarStore.subscribe((state) =>
-//   console.log("Avatar Store updated:", state)
-// );
+useAvatarStore.subscribe((state) =>
+  console.log("Avatar Store updated:", state)
+);
 // useSpeechStore.subscribe((state) =>
 //   console.log("Speech Store updated:", state.generatingSpeech)
 // );

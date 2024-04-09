@@ -39,6 +39,7 @@ const CharacterPrompt = () => {
   const selectedAvatar = useAvatarStore((state) => state.selectedAvatar);
   const loadingProject = useAvatarStore((state) => state.loadingProject);
   const setLoadingProject = useAvatarStore((state) => state.setLoadingProject);
+  const setSelectedAvatar = useAvatarStore((state) => state.setSelectedAvatar);
   const [generating, setGenerating] = useState(false);
   const [generated, setGenerated] = useState(false);
   const [uploadingAvatar, setUploadingAvatar] = useState(false);
@@ -85,6 +86,7 @@ const CharacterPrompt = () => {
       setGeneratingAvatar(true);
       setValidationErrors({});
       setGenerating(true);
+      setSelectedAvatar(null);
       const generatedAvatars = await axios.post("/api/avatar", formData);
       setGenerated(true);
       setGenerating(false);

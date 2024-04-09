@@ -19,6 +19,8 @@ function CharacterTab() {
     if (avatars.length === 1) {
       setSelectedAvatar(avatars[0].url);
       setDisableSelection(true);
+    } else {
+      setDisableSelection(false);
     }
 
     return () => {
