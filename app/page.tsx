@@ -1,13 +1,26 @@
-import { UserButton } from "@clerk/nextjs";
-import SpeechAnimation from "./create/[id]/speech/_components/SpeechAnimation";
-import AvatarAnimation from "./create/[id]/avatar/_components/AvatarAnimation";
-import VideoAnimation from "./create/[id]/video/_components/VideoAnimation";
+import Benefits from "./components/Benefits";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
+import Hero from "./components/Hero";
+import Pricing from "./components/Pricing";
+import ButtonGradient from "./assets/svg/ButtonGradient";
+import Services from "./components/Services";
+import Roadmap from "./components/Roadmap";
 
-export default async function Home() {
+export default function Home() {
   return (
-    <div>
-      Landing Page Hi there
-      <UserButton afterSignOutUrl="/" />
-    </div>
+    <>
+      <div className="pt-[4.75rem] lg:pt-[5.25rem] overflow-hidden">
+        <Header />
+        <Hero />
+        <Benefits />
+        {/* <Services /> */}
+        <Pricing />
+        {/* <Roadmap /> */}
+        <Footer />
+      </div>
+
+      <ButtonGradient />
+    </>
   );
 }
