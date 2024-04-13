@@ -11,7 +11,7 @@ const CharacterQuantitySelector = () => {
   const quantities = [1, 2, 3, 4];
 
   return (
-    <div className=" text-white flex flex-col ">
+    <div className=" dark:text-white flex flex-col ">
       <h1 className=" text-lg font-medium py-2">Number of Characters</h1>
       <div className="flex space-x-3">
         {quantities.map((quantity) => (
@@ -21,7 +21,7 @@ const CharacterQuantitySelector = () => {
             className={`w-8 h-8 rounded-full text-sm mx-1 text-center ${
               numberOfCharacters === quantity
                 ? " border-blue-500 bg-blue-500 border-2 "
-                : "border-2 border-zinc-100 "
+                : "border-2 border-zinc-500 dark:border-zinc-100 "
             }`}
             onClick={() =>
               setNumberOfCharacters("numberOfCharacters", quantity)
