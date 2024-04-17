@@ -14,10 +14,10 @@ const SpeedSelector = () => {
             type="button"
             key={currentSpeed}
             onClick={() => setSpeed("speed", currentSpeed)}
-            className={`w-20  py-2  rounded-full text-white ${
+            className={`w-20  py-2  rounded-full dark:text-white ${
               speed === currentSpeed
                 ? "bg-blue-500 ring-2 ring-blue-500"
-                : "border-2 border-zinc-100"
+                : "border-2 border-zinc-500 dark:border-zinc-100"
             }`}
           >
             {`${currentSpeed}x`}

@@ -19,7 +19,7 @@ const HairColorPicker = () => {
   return (
     <div>
       <h1 className=" text-lg font-medium py-2">Hair Color</h1>
-      <div className="flex items-center space-x-4 p-4 bg-zinc-900 rounded-full">
+      <div className="flex items-center space-x-4 p-4 rounded-full">
         {colors.map((color) => (
           <button
             type="button"
@@ -27,7 +27,7 @@ const HairColorPicker = () => {
             className={`w-6 h-6 rounded-full ${color.value}
               ${
                 hairColor == color.name
-                  ? `ring-2 ${color.ringValue} ring-offset-4 ring-offset-zinc-900`
+                  ? `ring-2 ${color.ringValue} ring-offset-4 ring-offset-background`
                   : ""
               }`}
             onClick={() => setHairColor("hairColor", color.name)}
