@@ -6,6 +6,8 @@ import { minusTokens } from "@/utils/actions";
 import { getUserByClerkId } from "@/utils/getUserByClerkId";
 import { redirect } from "next/navigation";
 
+export const maxDuration = 300;
+
 export const POST = async (request: NextRequest) => {
   const { gender, speed, speechInput, projectId } = await request.json();
 

@@ -78,10 +78,16 @@ const SpeechPrompt = () => {
       setGeneratingSpeech(true);
       setValidationErrors({});
       setGenerating(true);
-      const speech = await axios.post<Project>("/api/speech", {
-        ...formData,
-        projectId: params.id,
-      });
+      const speech = await axios.post<Project>(
+        "/api/speech",
+        {
+          ...formData,
+          projectId: params.id,
+        },
+        {
+          timeout: 600000,
+        }
+      );
 
       setGenerating(false);
       setGenerated(true);

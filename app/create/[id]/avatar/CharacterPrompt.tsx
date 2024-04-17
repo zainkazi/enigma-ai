@@ -87,7 +87,9 @@ const CharacterPrompt = () => {
       setValidationErrors({});
       setGenerating(true);
       setSelectedAvatar(null);
-      const generatedAvatars = await axios.post("/api/avatar", formData);
+      const generatedAvatars = await axios.post("/api/avatar", formData, {
+        timeout: 600000,
+      });
       setGenerated(true);
       setGenerating(false);
       setGeneratingAvatar(false);

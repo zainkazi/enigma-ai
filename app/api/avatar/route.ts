@@ -4,6 +4,8 @@ import openai from "@/utils/openai";
 import { redirect } from "next/navigation";
 import { NextRequest, NextResponse } from "next/server";
 
+export const maxDuration = 300;
+
 export const POST = async (request: NextRequest) => {
   const { ethnicity, ageGroup, gender, hairColor, numberOfCharacters } =
     await request.json();

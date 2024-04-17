@@ -7,6 +7,7 @@ import { minusTokens } from "@/utils/actions";
 import { getUserByClerkId } from "@/utils/getUserByClerkId";
 import { redirect } from "next/navigation";
 
+export const maxDuration = 300;
 export const dynamic = "force-dynamic";
 
 async function VideoPage({ params }: { params: { id: string } }) {
