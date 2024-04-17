@@ -14,10 +14,10 @@ export const POST = async (request: NextRequest) => {
   const imagePrompt = `Generate a realistic portrait of a ${ethnicity} ${ageGroup} ${gender} with ${hairColor} hair color, facing directly towards the viewer as if they are a news reporter speaking to the camera. Ensure that the background is neutral and unobtrusive, focusing solely on the subject. Exclude any additional elements or objects from the image.`;
 
   const image = await openai.images.generate({
-    model: "dall-e-2",
+    model: "dall-e-3",
     prompt: imagePrompt,
-    n: numberOfCharacters,
-    size: "256x256",
+    // n: numberOfCharacters,
+    size: "1024x1024",
   });
 
   const imageUrl = image.data[0].url;
