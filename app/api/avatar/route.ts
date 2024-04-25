@@ -7,18 +7,21 @@ import { NextRequest, NextResponse } from "next/server";
 export const maxDuration = 300;
 
 export const POST = async (request: NextRequest) => {
-  const { ethnicity, ageGroup, gender, hairColor, numberOfCharacters } =
+  const { model, ethnicity, ageGroup, gender, hairColor, numberOfCharacters } =
     await request.json();
 
-  const user = await getUserByClerkId();
-  if (user.tokens - 2 * numberOfCharacters < 0) redirect("/subscription");
+  const tokenUsage = model == "dall-e-3" ? 10 : 2;
+  const newCharacterNum = model == "dall-e-3" ? 1 : numberOfCharacters;
 
-  const imagePrompt = `Generate a realistic portrait of a ${ethnicity} ${ageGroup} ${gender} with ${hairColor} hair color, facing directly towards the viewer as if they are a news reporter speaking to the camera. Ensure that the background is neutral and unobtrusive, focusing solely on the subject. Exclude any additional elements or objects from the image.`;
+  const user = await getUserByClerkId();
+  if (user.tokens - tokenUsage * newCharacterNum < 0) redirect("/subscription");
+
+  const imagePrompt = `Generate a realistic portrait of a ${ethnicity} ${gender} in the age group of ${ageGroup} with ${hairColor} hair, facing directly towards the viewer. Ensure that the background is neutral and unobtrusive, focusing solely on the subject. Exclude any additional elements or objects from the image.`;
 
   const image = await openai.images.generate({
-    model: "dall-e-3",
+    model: model,
     prompt: imagePrompt,
-    // n: numberOfCharacters,
+    n: newCharacterNum,
     size: "1024x1024",
   });
 

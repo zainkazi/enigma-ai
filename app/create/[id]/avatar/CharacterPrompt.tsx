@@ -17,8 +17,10 @@ import { AvatarSchema, ageGroups } from "@/validationSchemas";
 import CharacterPromptLoading from "./_components/CharacterPromptLoading";
 import { useQueryClient } from "@tanstack/react-query";
 import { Project } from "@prisma/client";
+import ModelDropdown from "./_components/ModelDropDown";
 
 type FormErrors = {
+  model?: { _errors: string[] };
   ethnicity?: { _errors: string[] };
   ageGroup?: { _errors: string[] };
   gender?: { _errors: string[] };
@@ -106,6 +108,12 @@ const CharacterPrompt = () => {
   return (
     <form className="space-y-6" onSubmit={handleSubmit}>
       <div>
+        <ModelDropdown />
+        {validationErrors.model && (
+          <p className={errorClassnames}>Please select a model</p>
+        )}
+      </div>
+      <div>
         <EthnicityDropDownMenu />
         {validationErrors.ethnicity && (
           <p className={errorClassnames}>Please select an ethnicity</p>
@@ -129,9 +137,11 @@ const CharacterPrompt = () => {
           <p className={errorClassnames}>Please select a gender</p>
         )}
       </div>
-      <div>
-        <CharacterQuantitySelector />
-      </div>
+      {formData.model == "dall-e-2" && (
+        <div>
+          <CharacterQuantitySelector />
+        </div>
+      )}
       {generated || projectData?.avatarUrl ? (
         <div className="space-x-6">
           <Button disabled={generating || uploadingAvatar} type="submit">

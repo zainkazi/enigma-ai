@@ -19,7 +19,7 @@ const EthnicityDropDownMenu = () => {
 
   return (
     <div>
-      <h1 className="text-lg font-medium py-2">Ethnicty</h1>
+      <h1 className="text-lg font-medium py-2">Ethnicity</h1>
       <Select
         value={selectedEthnicity || ""}
         onValueChange={(value) => setEthnicity("ethnicity", value)}

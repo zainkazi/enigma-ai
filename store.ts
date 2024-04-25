@@ -1,8 +1,7 @@
-import { z } from "zod";
 import { create } from "zustand";
-import { AvatarSchema, SpeechSchema } from "./validationSchemas";
 
 export type AvatarFormData = {
+  model: string | null;
   ethnicity: string | null;
   ageGroup: string | null;
   hairColor: string | null;
@@ -42,6 +41,7 @@ interface SpeechStore {
 
 export const useAvatarStore = create<AvatarStore>()((set) => ({
   formData: {
+    model: null,
     ethnicity: null,
     ageGroup: null,
     hairColor: null,
@@ -77,7 +77,7 @@ export const useSpeechStore = create<SpeechStore>()((set) => ({
 }));
 
 useAvatarStore.subscribe((state) =>
-  console.log("Avatar Store updated:", state)
+  console.log("Avatar Store updated:", state.formData)
 );
 // useSpeechStore.subscribe((state) =>
 //   console.log("Speech Store updated:", state.generatingSpeech)

@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+export const models = ["dall-e-2", "dall-e-3"] as const;
+
 export const ethnicities = [
   "Asian",
   "Black/African descent",
@@ -33,6 +35,7 @@ export const hairColors = [
 export const genders = ["Male", "Female"] as const;
 
 export const AvatarSchema = z.object({
+  model: z.enum(models),
   ethnicity: z.enum(ethnicities),
   ageGroup: z.enum(ageGroups),
   hairColor: z.enum(hairColors),
