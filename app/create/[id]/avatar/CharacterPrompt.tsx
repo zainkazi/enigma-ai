@@ -12,10 +12,8 @@ import axios from "axios";
 import { ArrowRight, Loader2 } from "lucide-react";
 import { fetchProject, updateAvatar } from "@/utils/actions";
 import { useParams } from "next/navigation";
-import { useQuery } from "@tanstack/react-query";
 import { AvatarSchema, ageGroups } from "@/validationSchemas";
 import CharacterPromptLoading from "./_components/CharacterPromptLoading";
-import { useQueryClient } from "@tanstack/react-query";
 import { Project } from "@prisma/client";
 import ModelDropdown from "./_components/ModelDropDown";
 
@@ -30,7 +28,6 @@ type FormErrors = {
 export const errorClassnames = "text-red-500 text-sm mt-2";
 
 const CharacterPrompt = () => {
-  const queryClient = useQueryClient();
   const params = useParams();
   const formData = useAvatarStore((state) => state.formData);
   const setGeneratingAvatar = useAvatarStore(
@@ -47,11 +44,6 @@ const CharacterPrompt = () => {
   const [uploadingAvatar, setUploadingAvatar] = useState(false);
   const [validationErrors, setValidationErrors] = useState<FormErrors>({});
   const [projectData, setProjectData] = useState<Project>();
-
-  // const { data, isLoading, error } = useQuery({
-  //   queryKey: ["project"],
-  //   queryFn: async () => await fetchProject(params.id as string),
-  // });
 
   useEffect(() => {
     const getProject = async () => {
@@ -95,7 +87,6 @@ const CharacterPrompt = () => {
       setGenerated(true);
       setGenerating(false);
       setGeneratingAvatar(false);
-      queryClient.invalidateQueries({ queryKey: ["project"] });
       setAvatars(generatedAvatars.data.data);
     } else {
       setValidationErrors(validationResult.error.format());

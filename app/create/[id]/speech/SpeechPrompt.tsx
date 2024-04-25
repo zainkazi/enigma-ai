@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import { useSpeechStore } from "@/store";
 import axios from "axios";
 import { useParams, useRouter } from "next/navigation";
-import { useQuery } from "@tanstack/react-query";
 import { fetchProject } from "@/utils/actions";
 import { Project } from "@prisma/client";
 import { ArrowLeft, ArrowRight, Loader2 } from "lucide-react";
@@ -16,7 +15,6 @@ import { SpeechSchema } from "@/validationSchemas";
 import { errorClassnames } from "../avatar/CharacterPrompt";
 import Link from "next/link";
 import SpeechPromptLoading from "./_components/SpeechPromptLoading";
-import { useQueryClient } from "@tanstack/react-query";
 
 type FormErrors = {
   gender?: { _errors: string[] };
@@ -25,7 +23,6 @@ type FormErrors = {
 };
 
 const SpeechPrompt = () => {
-  const queryClient = useQueryClient();
   const params = useParams();
   const formData = useSpeechStore((state) => state.formData);
   const setGeneratingSpeech = useSpeechStore(
@@ -39,11 +36,6 @@ const SpeechPrompt = () => {
   const [generating, setGenerating] = useState(false);
   const [validationErrors, setValidationErrors] = useState<FormErrors>({});
   const router = useRouter();
-
-  // const { data, isLoading } = useQuery({
-  //   queryKey: ["speech"],
-  //   queryFn: async () => fetchProject(params.id as string),
-  // });
 
   useEffect(() => {
     const getProject = async () => {
@@ -93,7 +85,6 @@ const SpeechPrompt = () => {
       setGenerated(true);
       setGeneratingSpeech(false);
       setSpeechUrl(speech.data.speechUrl || "");
-      queryClient.invalidateQueries({ queryKey: ["speech"] });
     } else {
       setValidationErrors(validationResult.error.format());
     }
